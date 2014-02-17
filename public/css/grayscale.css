@@ -280,11 +280,11 @@ text-shadow:0px 0px 0 rgb(22,-1,55),-1px 1px 0 rgb(11,-12,44),-2px 2px 0 rgb(1,-
 
 @media(min-width:767px) {
     .content-section {
-        padding-top: 250px;
+        padding-top: 150px;
     }
 
     .download-section {
-        padding: 100px 0;
+        padding: 50px 0;
     }
 
     #map {
