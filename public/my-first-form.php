@@ -68,7 +68,9 @@ var_dump($_POST);
 
     <h1>Multiple Choice Test</h1> 
     <form method="GET" action="">
-    <p>What is the capital of Texas?</p>
+        <p>
+            What is the capital of Texas?
+        </p>
         <label for="q1a">
             <input type="radio" id="q1a" name="q1" value="houston">
             Houston
@@ -87,7 +89,7 @@ var_dump($_POST);
     <p>
             <input type="submit" value="Submit if sure"> 
         </p>        
-</label> 
+        </label> 
 
 
         <p>What is the capital of Mexico?</p>
@@ -106,12 +108,42 @@ var_dump($_POST);
         <label for="q2d">
             <input type="radio" id="q2d" name="q2" value="Mexico DF">
             Mexico DF
+        <p>
 
+        <br>
+        
+
+
+        
+        <label for="color">What is your favorite color? </label>
+        <select id="color" name="color[]" multiple>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="yellow">Yellow</option>
+            <option value="orange">Orange</option>
+            <option value="purple">Purple</option>
+
+        </select>        
+        </p> 
         <p>
             <input type="submit" value="C'mon, send me!"> 
-        </p>    
-</label> 
-    </form>         
+         </p>  
+        </label> 
+    </form>
+    
 
+
+    <h1>Select Testing</h1>
+        <form method="POST" action="">
+             <label for="transmission">Are you serious?? </label>
+        <select id="transmission" name="transmission">
+            <option value="1" selected>Yes?</option>
+            <option value "0">No!</option>
+        </select>
+         <p>
+            <input type="submit" value="Click it!"> 
+        </p>    
+    </form>
+  
 
 </body>
