@@ -7,19 +7,47 @@
 </head>
 
 
+<body>
+    <h1>User Login</h1>
+    <form method="POST" action="http://requestb.in/14h1s6h1">
+        <p>
+            <label for="username">Username</label>
+            <input id="username" name="username" placeholder="Username here." type="text" >
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input id="password" name="password" placeholder= "Yep, password here."type="password">
+        </p>
+        <p>
+            <!-- <input type="submit" value="Click me, I like it!"> -->
+            <button type="submit">Login</button>
+        </p>
+    </form>            
 
 
-<form method="POST" action="http://requestb.in/14h1s6h1">
-    <p>
-        <label for="username">Username </label>
-        <input id="username" name="username" placeholder="Username here." type="text" >
-    </p>
-    <p>
-        <label for="password">Password</label>
-        <input id="password" name="password" placeholder="Yep, password here."type="password">
-    </p>
-    <p>
-        <!-- <input type="submit" value="Click me, I like it!"> -->
-        <button type="submit">Login</button>
-    </p>
-</form>            
+
+    <h1>Compose an Email</h1>
+    <form method="POST" action="http://requestb.in/14h1s6h1">
+        <p>
+            <label for="To">To</label>
+            <input id="To" name="To" placeholder= "Recipient here." type="text" >
+        </p>
+        <p>
+            <label for="From">From</label>
+            <input id="From" name="From" placeholder= "Your email."type="text">
+        </p>
+        <p>
+            <label for="Subject">Subject</label>
+            <input id="Subject" name="Subject" placeholder= "Subject here"type="text">
+        </p>
+       
+            <label for="Email_body">Email body</label>
+            <textarea id="email_body" name="email_body" placeholder= "Content here"rows="5" cols="40"></textarea>
+      
+        <p>
+            <input type="submit" value="C'mon, send me!"> 
+        </p>
+    </form>            
+
+
+</body>
