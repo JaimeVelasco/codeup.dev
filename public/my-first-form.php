@@ -1,3 +1,14 @@
+<?php
+
+echo "<p>GET:</p>";
+var_dump($_GET);
+
+echo "<p>POST:</p>";
+var_dump($_POST);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="eng">
 
