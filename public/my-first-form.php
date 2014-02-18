@@ -20,7 +20,7 @@ var_dump($_POST);
 
 <body>
     <h1>User Login</h1>
-    <form method="POST" action="http://requestb.in/14h1s6h1">
+    <form method="POST" action="">
         <p>
             <label for="username">Username</label>
             <input id="username" name="username" placeholder="Username here." type="text" >
@@ -38,7 +38,7 @@ var_dump($_POST);
 
 
     <h1>Compose an Email</h1>
-    <form method="GET" action="http://requestb.in/14h1s6h1">
+    <form method="GET" action="">
         <p>
             <label for="To">To</label>
             <input id="To" name="To" placeholder= "Recipient here." type="text" >
@@ -67,7 +67,7 @@ var_dump($_POST);
 
 
     <h1>Multiple Choice Test</h1> 
-    <form method="GET" action="http://requestb.in/14h1s6h1">
+    <form method="GET" action="">
     <p>What is the capital of Texas?</p>
         <label for="q1a">
             <input type="radio" id="q1a" name="q1" value="houston">
@@ -84,6 +84,9 @@ var_dump($_POST);
         <label for="q1d">
             <input type="radio" id="q1d" name="q1" value="san antonio">
             San Antonio
+    <p>
+            <input type="submit" value="Submit if sure"> 
+        </p>        
 </label> 
 
 
@@ -103,6 +106,10 @@ var_dump($_POST);
         <label for="q2d">
             <input type="radio" id="q2d" name="q2" value="Mexico DF">
             Mexico DF
+
+        <p>
+            <input type="submit" value="C'mon, send me!"> 
+        </p>    
 </label> 
     </form>         
 
