@@ -12,10 +12,16 @@
 		// Create a log statement that will log the number of elements in the names array.
 		console.log('There are ' + names.length + ' items in the array ');
 		// Create log statements that will print each of the names array elements individually.
-		for (i = 0; i < names.length; i++) {
-			console.log('The name at index ' + i + ' is ' + names[i]); 	
-		}
+		
 
+		// for (i = 0; i < names.length; i++) {
+		// 	console.log('The name at index ' + i + ' is ' + names[i]); 	
+		// }
+
+
+		names.forEach(function(elements, index, array){
+			console.log('The name at index ' + index + ' is ' + elements);
+		})
 
 		// console.log(names[0]);
 		// console.log(names[1]);
