@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Functions Intro JS</title>
+</head>
+<body>
+	<script >
+		var myNameIs = 'Jaime';
+
+	// Create a function called 'sayHello' that takes a parameter 'name'.
+	// When called, the function should log a message that says hello from the passed in name.
+		function sayHello(name){
+			console.log("Hello, my name is " + name);
+		}
+		sayHello(myNameIs);
+
+		var random = Math.floor((Math.random()*100)+1);
+		console.log("The random number is " + random);
+		// Create a function called 'isOdd' that takes a number as a parameter.
+		// The function should use the ternary operator to log a message.
+		// The log should tell the number passed in and whether it is odd or not.
+
+		// todo: Call the function 'isOdd' passing the variable 'random' as a parameter.
+
+		function isOdd(test){
+			var number = test %2 != 0;
+			number ? console.log ("This is an Odd number") : console.log ("This is NOT an Odd number");
+			return;
+		}
+		
+		isOdd(random);
+	</script>
+
+</body>
+</html>
