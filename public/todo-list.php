@@ -66,19 +66,16 @@
 				$item = $_POST['NewItem'];
 				array_push($items, $item);
 				write_file($items, "Data/todo_list.txt");
+				header ("Location: todo-list.php");
 				}
 
-			// foreach ($items as $item) {
-			// 	echo "<li>$item</li>";
-
-			// }
 		?>
 	</ul>  
 
 		<ul>
 				<?php foreach ($items as $key => $item) { ?>
 					<li><?php echo $item?>
-					<a href='?remove=<?php echo $key; ?>'>Remove</a>
+					<a href='?remove=<?php echo $key; ?>'> (x) </a>
 					</li>
 				<?php } ?>
 					
@@ -87,9 +84,11 @@
    
 
 		<?php 	if(isset($_GET['remove'])){
-				$key = $_GET['remove'];
-				unset($items[$key]);
+				$NoItem = $_GET['remove'];
+				unset($items[$NoItem]);
 				write_file($items, "Data/todo_list.txt");
+				header ("Location: todo-list.php");
+				exit();
 				}
 
 		?>		
