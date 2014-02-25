@@ -90,7 +90,7 @@
 				unset($items[$NoItem]);
 				write_file($items, $filename);
 				header ("Location: todo-list.php");
-				exit();
+				exit(0);
 				}
 
 		?>		
