@@ -1,4 +1,4 @@
-
+<!-- 
 	<?php
 
 	echo "<p>GET:</p>";
@@ -8,7 +8,7 @@
 	var_dump($_POST);
 
 	?>
-
+ -->
  
 
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
 	    <form method="POST" action="todo-list.php">
 	        <p>
 	            <label for="NewItem">New Item</label>
-	            <input id="NewItem" name="NewItem" placeholder="new item here." type="text" >
+	            <input id="NewItem" name="NewItem" placeholder="new item here." type="text" autofocus='autofocus' >
 	        </p>
 
 	        <p>
@@ -41,8 +41,8 @@
 		<?php 
 			
 			
-
-
+			$items = [];
+			$filename = "Data/todo_list.txt";
 
 			function open_file($file){
 			    $filename = $file;
@@ -60,33 +60,35 @@
 		        fclose($handle);
 		    }
 
-			$items = open_file ("Data/todo_list.txt");
+		    if(filesize($filename) > 0){
+			$items = open_file ($filename);
+			}
 
-				if(isset($_POST['NewItem'])){
-				$item = $_POST['NewItem'];
-				array_push($items, $item);
-				write_file($items, "Data/todo_list.txt");
-				header ("Location: todo-list.php");
-				}
+			if(isset($_POST['NewItem']) && !empty($_POST['NewItem'])){
+			$item = $_POST['NewItem'];
+			array_push($items, $item);
+			write_file($items, $filename);
+			header ("Location: todo-list.php");
+			}
 
 		?>
 	</ul>  
 
-		<ul>
-				<?php foreach ($items as $key => $item) { ?>
-					<li><?php echo $item?>
-					<a href='?remove=<?php echo $key; ?>'> (x) </a>
-					</li>
-				<?php } ?>
-					
-					
-		</ul>		
-   
+	<ul>
+			<?php foreach ($items as $key => $item) { ?>
+				<li><?php echo $item?>
+				<a href='?remove=<?php echo $key; ?>'> (Remove) </a>
+				</li>
+			<?php } ?>
+				
+				
+	</ul>		
+
 
 		<?php 	if(isset($_GET['remove'])){
 				$NoItem = $_GET['remove'];
 				unset($items[$NoItem]);
-				write_file($items, "Data/todo_list.txt");
+				write_file($items, $filename);
 				header ("Location: todo-list.php");
 				exit();
 				}
