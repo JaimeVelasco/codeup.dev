@@ -61,14 +61,14 @@
 		    }
 
 		    if(filesize($filename) > 0){
-			$items = open_file ($filename);
+				$items = open_file ($filename);
 			}
 
 			if(isset($_POST['NewItem']) && !empty($_POST['NewItem'])){
-			$item = $_POST['NewItem'];
-			array_push($items, $item);
-			write_file($items, $filename);
-			header ("Location: todo-list.php");
+				$item = $_POST['NewItem'];
+				array_push($items, $item);
+				write_file($items, $filename);
+				header ("Location: todo-list.php");
 			}
 
 		?>
@@ -86,11 +86,11 @@
 
 
 		<?php 	if(isset($_GET['remove'])){
-				$NoItem = $_GET['remove'];
-				unset($items[$NoItem]);
-				write_file($items, $filename);
-				header ("Location: todo-list.php");
-				exit(0);
+					$NoItem = $_GET['remove'];
+					unset($items[$NoItem]);
+					write_file($items, $filename);
+					header ("Location: todo-list.php");
+					exit(0);
 				}
 
 		?>		
