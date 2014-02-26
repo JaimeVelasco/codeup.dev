@@ -1,4 +1,4 @@
-
+<!-- 
 	<?php
 
 	echo "<p>GET:</p>";
@@ -10,7 +10,7 @@
 	echo "<p>_FILES:</p>";
 	var_dump($_FILES);
 	?>
-
+ -->
  
 
 
