@@ -49,7 +49,7 @@
 			}
 
 			if(isset($_POST['NewItem']) && !empty($_POST['NewItem'])){
-				$item = $_POST['NewItem'];
+				$item = htmlspecialchars(strip_tags($_POST['NewItem']));
 				array_push($items, $item);
 				write_file($items, $filename);
 				header ("Location: todo-list.php");
@@ -107,18 +107,18 @@
 
 <body>
 
-	<h1>TODO List</h1>
+	<h1>TODO LIST</h1>
 		<?if(count($items) > 0): ?>
 		<ul>
 			<? foreach ($items as $key => $item): ?>
-				<li><?= htmlspecialchars(strip_tags($item)) ?>
+				<li><?= $item ?>
 				<a href='?remove=<?= $key; ?>'> (Remove) </a>
 				</li>
 			<? endforeach; ?>
 		</ul>	
 					
 			<? else: ?>
-				<p>You have 0 Todo Items</p>
+				<h2>You are done, go find something to do!!</h2>
 			<? endif; ?>		
 		
 
@@ -154,3 +154,9 @@
 
 </body>
 
+<footer>
+	<p>&copy 2014 Jaime Velasco</p>
+
+</footer>
+
+</html>
