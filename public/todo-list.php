@@ -52,7 +52,7 @@
 				$item = $_POST['NewItem'];
 				array_push($items, $item);
 				write_file($items, $filename);
-				// header ("Location: todo-list.php");
+				header ("Location: todo-list.php");
 			}
 
 
@@ -60,8 +60,8 @@
 				$NoItem = $_GET['remove'];
 				unset($items[$NoItem]);
 				write_file($items, $filename);
-				// header ("Location: todo-list.php");
-				// exit(0);
+				header ("Location: todo-list.php");
+				exit(0);
 			}
 
 
@@ -80,15 +80,15 @@
 
 			// Check if we saved a file
 			if (isset($saved_filename)){
-			    $handle = open_file($saved_filename);
+				$handle = open_file($saved_filename);
 			    $Merged = array_merge($items, $handle);
 			   	// var_dump($Merged);
-			    
+			    // if (isset ($_POST["overwrite"] == 'true')){;
 			    write_file ($Merged, $filename);
 			    header ("Location: todo-list.php");
-				
-			    
-			}
+			
+				}    
+			
 
 		?>
 	</ul>  
@@ -108,16 +108,19 @@
 <body>
 
 	<h1>TODO List</h1>
-
-	<ul>
+		<?if(count($items) > 0): ?>
+		<ul>
 			<? foreach ($items as $key => $item): ?>
-				<li><?= htmlspecialchars ($item)  ?>
+				<li><?= htmlspecialchars(strip_tags($item)) ?>
 				<a href='?remove=<?= $key; ?>'> (Remove) </a>
 				</li>
 			<? endforeach; ?>
-				
-				
-	</ul>		
+		</ul>	
+					
+			<? else: ?>
+				<p>You have 0 Todo Items</p>
+			<? endif; ?>		
+		
 
 
 
@@ -137,13 +140,15 @@
 			<p>      
 	            <label for="UploadFile">Upload File</label>
 	            <input id="UploadFile" name="UploadFile" type="file">
+
 	            <label for="overwrite">Want to overwrite the original list?</label>
-	            <input id="overwrite" type="checkbox">
+	            <input id="overwrite" name="overwrite" type="checkbox" value="true">
 	        </p>
 
 	        <p>
 	        	<input type="submit" value="Upload File">
 	        </p>
+	    </form>
 
 
 
