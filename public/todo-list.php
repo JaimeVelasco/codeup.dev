@@ -7,8 +7,6 @@
 	echo "<p>POST:</p>";
 	var_dump($_POST);
 
-	echo "<p>_FILES:</p>";
-	var_dump($_FILES);
 	?>
  -->
  

@@ -7,7 +7,7 @@
 	// var_dump($_POST);
 
 
-// changes!!!! renamed many variables for readability
+
 
 
 
@@ -83,16 +83,14 @@ function saveFile($NewList, $filename) {
 
 
 <tr>
-<? foreach ($NewList as $key => $value) : ?>
-				<tr>
-					<? if ($value != '') : ?>
-						<? foreach ($value as $item) : ?>
-							<td><?= htmlspecialchars(strip_tags($item)) ?></td>
-							
-						<? endforeach; ?>
-
-						
-					<? endif; ?>
+<? foreach ($NewList as $key => $value) : ?> 
+	<tr>
+		<!-- Double check this!! -->
+		<? if ($value != null ) : ?>   
+			<? foreach ($value as $item) : ?>
+			<td><?= htmlspecialchars(strip_tags($item)) ?></td>
+			<? endforeach; ?>
+		<? endif; ?>
 					
 				</tr>
 			<? endforeach; ?>
@@ -113,31 +111,31 @@ function saveFile($NewList, $filename) {
 				
 
 	    <form align="center" method="POST" enctype="multipart/form-data" action="">
-	        <p align="center">
+	        <p
 	            <label for="Name"></label>
 	            <input id="Name" name="Name" placeholder="Name" type="text" autofocus='autofocus' required>
-	        </p>
-	        <p align="center">
+	        
+	       
 	            <label for="Address"></label>
 	            <input id="Address" name="Address" placeholder="Address" type="text" required>
-	        </p>
-	        <p align="center"> 
+	        
+	       
 	        	<label for="City"></label>
 	            <input id="City" name="City" placeholder="City" type="text" required>
-	        </p>
-	        <p align="center">
+	        
+	        
 	            <label for="State"></label>
 	            <input id="State" name="State" placeholder="State" type="text" required>
-	        </p>
-	        <p align="center">
+	      
+	     
 	        	<label for="ZipCode"></label>
 	            <input id="ZipCode" name="ZipCode" placeholder="ZipCode" type="text" required>
-	        </p>
-	     	<p align="center">
+	    
+	    
 	            <label for="Phone"></label>
 	            <input id="Phone" name="Phone" placeholder="Phone" type="text" >
-	        </p>
-	        <p align="center">
+	    
+	      
 	        	<input type="submit" value="Add new entry" >
 	        </p>
 
