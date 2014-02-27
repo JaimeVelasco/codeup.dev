@@ -88,7 +88,7 @@ function saveFile($NewList, $filename) {
 				
 
 	    <form align="center" method="POST" enctype="multipart/form-data" action="">
-	        <p
+	        <p>
 	            <input id="Name" name="Name" placeholder="Name" type="text" autofocus='autofocus' required>
 	       
 	            <input id="Address" name="Address" placeholder="Address" type="text" required>
