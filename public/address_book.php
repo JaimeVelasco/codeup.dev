@@ -12,7 +12,6 @@
 
 
 $address_book = [];
-$error = "";
 $filename= 'Data/address_book.csv';
 
 
@@ -31,21 +30,18 @@ function open_file($filename) {
 		return $openfile;
 	}
 
-function addItem($NewItemList, $error) {
+function addItem($NewList) {
 		$NewItem = $_POST;
-		if ($NewItem['Name'] == '' || $NewItem['Address'] == '' || $NewItem['City'] == '' || $NewItem['State'] == '' || $NewItem['ZipCode'] == '') {
-			$error = "Please enter all information";
-		} else {
-			$NewItemList[] = $NewItem;
-			$error = "";
+		$NewList[] = $NewItem;
+		return $NewList;		
 		}
-		return $NewItemList;
-	}
+		
+	
 
 
-function saveFile($NewItemList, $filename) {
+function saveFile($NewList, $filename) {
 		$handle = fopen($filename, 'w');
-		foreach ($NewItemList as $fields) {
+		foreach ($NewList as $fields) {
 			if ($fields != "") {
 				fputcsv($handle, $fields);
 			}
@@ -54,12 +50,12 @@ function saveFile($NewItemList, $filename) {
 	}
 	
 
-	$NewItemList = open_file($filename);
-	$NewItemList = addItem($NewItemList, $error);
+	$NewList = open_file($filename);
+	$NewList = addItem($NewList);
 	
 
-// var_dump($NewItemList);
-	saveFile($NewItemList, $filename)
+// var_dump($NewList);
+	saveFile($NewList, $filename)
 ?>	
 
 
@@ -87,7 +83,7 @@ function saveFile($NewItemList, $filename) {
 
 
 <tr>
-<? foreach ($NewItemList as $key => $value) : ?>
+<? foreach ($NewList as $key => $value) : ?>
 				<tr>
 					<? if ($value != '') : ?>
 						<? foreach ($value as $item) : ?>
@@ -114,38 +110,40 @@ function saveFile($NewItemList, $filename) {
 
 
 <h1 align="center">Add a new entry to the Address Book</h1>
-				<p><?= $error; ?></p>
+				
 
 	    <form align="center" method="POST" enctype="multipart/form-data" action="">
-	        <p>
-	            <label for="Name">Name</label>
-	            <input id="Name" name="Name" placeholder="Name" type="text" autofocus='autofocus' >
+	        <p align="center">
+	            <label for="Name"></label>
+	            <input id="Name" name="Name" placeholder="Name" type="text" autofocus='autofocus' required>
 	        </p>
-	        <p>
-	            <label for="Address">Address</label>
-	            <input id="Address" name="Address" placeholder="Address" type="text">
+	        <p align="center">
+	            <label for="Address"></label>
+	            <input id="Address" name="Address" placeholder="Address" type="text" required>
 	        </p>
-	        <p> 
-	        	<label for="City">City</label>
-	            <input id="City" name="City" placeholder="City" type="text">
+	        <p align="center"> 
+	        	<label for="City"></label>
+	            <input id="City" name="City" placeholder="City" type="text" required>
 	        </p>
-	        <p>
-	            <label for="State">State</label>
-	            <input id="State" name="State" placeholder="State" type="text">
+	        <p align="center">
+	            <label for="State"></label>
+	            <input id="State" name="State" placeholder="State" type="text" required>
 	        </p>
-	        <p>
-	        	<label for="ZipCode">ZipCode</label>
-	            <input id="ZipCode" name="ZipCode" placeholder="ZipCode" type="text">
+	        <p align="center">
+	        	<label for="ZipCode"></label>
+	            <input id="ZipCode" name="ZipCode" placeholder="ZipCode" type="text" required>
 	        </p>
-	     	<p>
-	            <label for="Phone">Phone</label>
-	            <input id="Phone" name="Phone" placeholder="Phone" type="text">
+	     	<p align="center">
+	            <label for="Phone"></label>
+	            <input id="Phone" name="Phone" placeholder="Phone" type="text" >
 	        </p>
-	        <p>
-	        	<input type="submit" value="Add new entry">
+	        <p align="center">
+	        	<input type="submit" value="Add new entry" >
 	        </p>
 
 	    </form>
+
+
 
 </body>
 <footer>
