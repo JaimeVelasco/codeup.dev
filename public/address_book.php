@@ -7,12 +7,12 @@
 	// var_dump($_POST);
 
 
-
+// changes!!!! renamed many variables for readability
 
 
 
 $address_book = [];
-$errorMessage = "";
+$error = "";
 $filename= 'Data/address_book.csv';
 
 
@@ -24,51 +24,43 @@ function open_file($filename) {
 			while(!feof($handle)) {
 				$openfile[] = fgetcsv($handle);
 			}
-		} else {
+		} else {//do I really need this?
 			$openfile = array();
 		} 
 		fclose($handle);
 		return $openfile;
 	}
 
-function addItem($addressBook, &$errorMessage) {
-		$temp = $_POST;
-		if ($temp['Name'] == '' || $temp['Address'] == '' || $temp['City'] == '' || $temp['State'] == '' || $temp['ZipCode'] == '') {
-			$errorMessage = "Please enter all information";
+function addItem($NewItemList, $error) {
+		$NewItem = $_POST;
+		if ($NewItem['Name'] == '' || $NewItem['Address'] == '' || $NewItem['City'] == '' || $NewItem['State'] == '' || $NewItem['ZipCode'] == '') {
+			$error = "Please enter all information";
 		} else {
-			$addressBook[] = $temp;
-			$errorMessage = "";
+			$NewItemList[] = $NewItem;
+			$error = "";
 		}
-		return $addressBook;
+		return $NewItemList;
 	}
-function saveFile($addressBook, $filename) {
+
+
+function saveFile($NewItemList, $filename) {
 		$handle = fopen($filename, 'w');
-		foreach ($addressBook as $fields) {
+		foreach ($NewItemList as $fields) {
 			if ($fields != "") {
 				fputcsv($handle, $fields);
 			}
 		}
 		fclose($handle);
 	}
-	$addressBook = open_file($filename);
+	
 
+	$NewItemList = open_file($filename);
+	$NewItemList = addItem($NewItemList, $error);
+	
 
-	if (!empty($_POST) ) {
-		$addressBook = addItem($addressBook, $errorMessage);
-	}
-
-// var_dump($addressBook);
-	saveFile($addressBook, $filename)
+// var_dump($NewItemList);
+	saveFile($NewItemList, $filename)
 ?>	
-
-
-
-
-
-
-
-
-
 
 
 
@@ -94,18 +86,21 @@ function saveFile($addressBook, $filename) {
 </tr>
 
 
-
-<? foreach ($addressBook as $key => $value) : ?>
+<tr>
+<? foreach ($NewItemList as $key => $value) : ?>
 				<tr>
 					<? if ($value != '') : ?>
 						<? foreach ($value as $item) : ?>
 							<td><?= htmlspecialchars(strip_tags($item)) ?></td>
+							
 						<? endforeach; ?>
-						</td>
+
+						
 					<? endif; ?>
+					
 				</tr>
 			<? endforeach; ?>
-			
+
 </tr>
 
 
@@ -119,7 +114,7 @@ function saveFile($addressBook, $filename) {
 
 
 <h1 align="center">Add a new entry to the Address Book</h1>
-
+				<p><?= $error; ?></p>
 
 	    <form align="center" method="POST" enctype="multipart/form-data" action="">
 	        <p>
