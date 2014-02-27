@@ -104,7 +104,7 @@ function saveFile($NewList, $filename) {
 	        	<input type="submit" value="Add new entry" >
 	        </p>
 
-	    </form>
+	    </form> 
 
 </body>
 <footer>
