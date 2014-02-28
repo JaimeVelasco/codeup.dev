@@ -2,38 +2,30 @@
 
 <?php
 // Include local file 'address_data_store.php'
-require_once('address_data_store.php');
+require_once('file_store.php');
+class AddressDataStore extends Filestore {
 
-function new_array($items) {
-    $new_items = [];
-    foreach ($items as $key => $data) {
-       	$new_items[] = $data;
-    }
-    return $new_items;
 }
 
-//create object
-$book = new AddressDataStore();
-$book_array = $book->read_address_book();
+$book = new AddressDataStore('Data/address_book.csv');
+$book_array = $book->read_csv();
 $error = '';
+
 
 
 if (!empty($_POST['Name']) && !empty($_POST['Address']) && !empty($_POST['City']) && !empty($_POST['State']) && !empty($_POST['ZipCode'])) {
 	// Define new entry to the array
 		$newEntry = [$_POST['Name'], $_POST['Address'], $_POST['City'], $_POST['State'], $_POST['ZipCode'], $_POST['Phone']];
 		array_push($book_array, $newEntry);
-		// Write new array new file
-		$book_array = new_array(array_values($book_array));
-		$book->write_address_book($book_array);
+		$book->write_csv($book_array);
 	} elseif (isset($_POST['submit'])) {
 		$error = 'You forgot something!!';
 	} elseif (isset($_GET['key'])) {
 		foreach ($book_array as $key => $data) {
 			if ($_GET['key'] == $key) {
-				unset($book_array[$key]);
-				$book_array = new_array(array_values($book_array));
+				unset($book_array[$key]);				
 			}
-			$book->write_address_book($book_array);
+			$book->write_csv($book_array);
 		}
 }
 
@@ -47,27 +39,15 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 	// Move the file from the temp location to our uploads directory
 	move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 
-
-//creating a new instance of $book
-	$newBook = new AddressDataStore($saved_filename);
-	$new = $newBook->read_address_book();
-
-
-
-
-	if(isset($_POST['overwrite'])) {
-	$book_array = $new;
-	} else {
-	    foreach ($new as $key => $data) {
-	    	array_push($book_array, $new[$key]);
-	    }
-	    $book_array = new_array($book_array);
-	}
-
-	$book->write_address_book($book_array);
 }
 
-// var_dump($_POST);	
+	  		
+
+	$book->write_csv($book_array);
+
+
+
+// var_dump($new_items);	
 
 ?>
 
@@ -154,9 +134,6 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 	    	</p>
 	    	<p>
 	    	    <input class="btn btn-success btn-md" type="submit" value="Upload">
-	    		<form method="POST">
-	    		<label><input type="checkbox" name="overwrite" id="overwrite" value="yes">Overwrite Current List</label>
-	    		</form>
 	    	</p>
 	    
 

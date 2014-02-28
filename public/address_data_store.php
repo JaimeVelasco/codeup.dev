@@ -1,11 +1,10 @@
 <?php
+
 class AddressDataStore {
 
     public $filename = '';
 
-    function __construct($filename = 'Data/address_book.csv') {
-    	$this->filename = $filename;
-    }
+   
 
     function read_address_book()
     {
@@ -30,7 +29,7 @@ class AddressDataStore {
     function write_address_book($addresses_array) 
     {
         // Code to write $addresses_array to file $this->filename
-        $handle = fopen($this->filename, "w+");
+        $handle = fopen($this->filename, "w");
         foreach($addresses_array as $fields) {
         	fputcsv($handle, $fields);
         }
