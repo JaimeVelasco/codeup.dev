@@ -11,9 +11,17 @@ $error = '';
 
 
 
-if (!empty($_POST['Name']) && !empty($_POST['Address']) && !empty($_POST['City']) && !empty($_POST['State']) && !empty($_POST['ZipCode'])) {
+if (!empty($_POST['Name']) 
+	&& !empty($_POST['Address'])
+	&& !empty($_POST['City']) 
+	&& !empty($_POST['State']) 
+	&& !empty($_POST['ZipCode'])) {
 	// Define new entry to the array
-		$newEntry = [$_POST['Name'], $_POST['Address'], $_POST['City'], $_POST['State'], $_POST['ZipCode'], $_POST['Phone']];
+		$newEntry = [$_POST['Name'], 
+					 $_POST['Address'], 
+					 $_POST['City'], $_POST['State'], 
+					 $_POST['ZipCode'], 
+					 $_POST['Phone']];
 		array_push($book_array, $newEntry);
 		$book->write_csv($book_array);
 	} elseif (isset($_POST['submit'])) {
@@ -22,10 +30,10 @@ if (!empty($_POST['Name']) && !empty($_POST['Address']) && !empty($_POST['City']
 		foreach ($book_array as $key => $data) {
 			if ($_GET['key'] == $key) {
 				unset($book_array[$key]);				
-			}
+				}
 			$book->write_csv($book_array);
+			}
 		}
-}
 
 if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 	// Set the destination directory for uploads
