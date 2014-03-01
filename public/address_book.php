@@ -1,5 +1,3 @@
-<!DOCTYPE=HTML>
-
 <?php
 // Include local file 'address_data_store.php'
 require_once('file_store.php');
