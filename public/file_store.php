@@ -4,8 +4,7 @@ class Filestore {
 
     public $filename = '';
 
-    function __construct($filename = '') 
-    {
+    function __construct($filename = ''){
         // Sets 
         $this->filename=$filename;
     }
@@ -37,8 +36,7 @@ class Filestore {
     /**
      * Reads contents of csv $this->filename, returns an array
      */
-    function read_csv()
-    {
+    function read_csv(){
         // Code to read file $this->filename
         $handle = fopen($this->filename, "r");
         if (filesize($this->filename) == 0) {
@@ -62,8 +60,7 @@ class Filestore {
     /**
      * //Writes contents of $array to csv $this->filename
      */
-    function write_csv($array)
-    {
+    function write_csv($array){
          // Code to write $addresses_array to file $this->filename
         $handle = fopen($this->filename, "w");
         foreach($array as $fields) {

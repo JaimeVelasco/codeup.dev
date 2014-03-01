@@ -11,15 +11,16 @@ $error = '';
 
 
 
-if (!empty($_POST['Name']) 
-	&& !empty($_POST['Address'])
-	&& !empty($_POST['City']) 
-	&& !empty($_POST['State']) 
-	&& !empty($_POST['ZipCode'])) {
+if (!empty($_POST['Name']) && 
+	!empty($_POST['Address']) && 
+	!empty($_POST['City']) &&
+ 	!empty($_POST['State']) && 
+ 	!empty($_POST['ZipCode'])) {
 	// Define new entry to the array
 		$newEntry = [$_POST['Name'], 
 					 $_POST['Address'], 
-					 $_POST['City'], $_POST['State'], 
+					 $_POST['City'], 
+					 $_POST['State'], 
 					 $_POST['ZipCode'], 
 					 $_POST['Phone']];
 		array_push($book_array, $newEntry);
@@ -64,8 +65,7 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 </head>
 <body>
 
-<h1 align="center">ADDRESS BOOK</h1>
-<hr>	
+<h1 align="center">ADDRESS BOOK</h1>	
 
 <table border="3px" style="width:800px" align="center">
 <colgroup>
