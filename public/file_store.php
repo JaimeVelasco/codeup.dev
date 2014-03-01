@@ -60,12 +60,12 @@ class Filestore {
     
 
     /**
-     * Writes contents of $array to csv $this->filename
+     * //Writes contents of $array to csv $this->filename
      */
     function write_csv($array)
     {
          // Code to write $addresses_array to file $this->filename
-        $handle = fopen($this->filename, "w+");
+        $handle = fopen($this->filename, "w");
         foreach($array as $fields) {
             fputcsv($handle, $fields);
         }
