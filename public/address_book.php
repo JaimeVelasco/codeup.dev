@@ -6,8 +6,8 @@ class AddressDataStore extends Filestore {
 }
 
 $book = new AddressDataStore('Data/address_book.csv');
-$book_array = $book->read_csv();
-$error = '';
+$book_array = $book->read();
+$error = ''	;
 
 
 
@@ -24,33 +24,41 @@ if (!empty($_POST['Name']) &&
 					 $_POST['ZipCode'], 
 					 $_POST['Phone']];
 		array_push($book_array, $newEntry);
-		$book->write_csv($book_array);
+		$book->save($book_array);
 	} elseif (isset($_POST['submit'])) {
 		$error = 'You forgot something!!';
 	} elseif (isset($_GET['key'])) {
+		//Remove item from address_book array 
+		//Save array to data storage
 		foreach ($book_array as $key => $data) {
 			if ($_GET['key'] == $key) {
 				unset($book_array[$key]);				
 				}
-			$book->write_csv($book_array);
+			$book->save($book_array);
 			}
 		}
 
-if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
-	// Set the destination directory for uploads
-	$upload_dir = '/vagrant/sites/codeup.dev/public/uploads';
-	// Grab the filename from the uploaded file by using basename
-	$filename = basename($_FILES['file1']['name']);
-	// Create the saved filename using the file's original name and our upload directory
-	$saved_filename = $upload_dir . $filename;
-	// Move the file from the temp location to our uploads directory
-	move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
-
-}
-
+if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['type'] == 'text/csv') {
+	    // Set the destination directory for uploads
+	    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+	    // Grab the filename from the uploaded file by using basename
+	    $tempfilename = basename($_FILES['file1']['name']);
+	    // Create the saved filename using the file's original name and our upload directory
+	    $newlist->filename = $upload_dir . $tempfilename;
+	    // Move the file from the temp location to our uploads directory
+	    move_uplofile1aded_file($_FILES['file1']['tmp_name'], $newlist->filename);
+	    $appendList = $newlist->read();
+	    if (isset($_POST['overwrite']) && $_POST['overwrite'] == "yes") {
+	    	$addressBook = $appendList;
+	    	$book->read($addressBook);
+	    } else {
+	    	$addressBook = array_merge($addressBook, $appendList);
+	    	$book->save($addressBook);
+	    }
+	}
 	  		
 
-	$book->write_csv($book_array);
+	
 
 
 
@@ -133,13 +141,18 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0) {
 
 		</form>
 
-		<form align="center" method="POST" enctype="multipart/form-data" action="address_book.php">
+		<form align="center" method="POST" enctype="multipart/form-data" action="">
 	    	<p>
 	    	    <label for="file1"><h2>File to upload: </h2></label>
 	    	    <input type="file" id="file1" name="file1">
 	    	</p>
 	    	<p>
-	    	    <input class="btn btn-success btn-md" type="submit" value="Upload">
+			    <label for="overwrite">
+				    <input type="checkbox" id="overwrite" name="overwrite" value="yes"> Overwrite address book?
+				</label>
+			</p>
+	    	<p>
+	    	    <button type="submit" value="Upload">Upload</button>	
 	    	</p>
 	    
 
