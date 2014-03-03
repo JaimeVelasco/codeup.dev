@@ -39,7 +39,9 @@ class Filestore {
      */
     private function read_lines(){
         $handle = fopen($this->filename, "r");
-        $contents = fread($handle, filesize($filename));
+        $size = filesize($this->filename);
+        $contents = fread($handle, $size);
+
         fclose($handle);
         return explode("\n", $contents);
     }       
@@ -50,7 +52,7 @@ class Filestore {
      */
     private function write_lines($array){
         $handle = fopen($this->filename, "w");
-        $item = implode("\n", $items);
+        $item = implode("\n", $array);
         fwrite($handle, $item);
         fclose($handle);
     }

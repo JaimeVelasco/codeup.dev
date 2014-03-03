@@ -9,87 +9,93 @@
 
 	?>
  -->
- 
 
 
 
-	<ul>
+
 
 		<?php 
 			
-			$MergedArray = [];
-			$items = [];
-			$filename = "Data/todo_list.txt";
+require_once 'file_store.php';	
+$list = new Filestore("Data/todo_list.txt");
+$items = $list->read();
+$archiveFile = new Filestore('Data/archives.txt');
+$archives = $archiveFile->read();
+$errorMessage = '';
 
-
-			function open_file($file){
-			    $filename = $file;
-			    $handle = fopen($filename, "r");
-			    $contents = fread($handle, filesize($filename));
-			    fclose($handle);
-			    return explode("\n", $contents);
-			}
-
-
-
-			function write_file ($items, $file){
-		        $filename = $file;
-		        $handle = fopen($filename, "w");
-		        $item = implode("\n", $items);
-		        fwrite($handle, $item);
-		        fclose($handle);
-		    }
-
-		    
-
-		    if(filesize($filename) > 0){
-				$items = open_file ($filename);
-			}
+		   
 
 			if(isset($_POST['NewItem']) && !empty($_POST['NewItem'])){
 				$item = htmlspecialchars(strip_tags($_POST['NewItem']));
 				array_push($items, $item);
-				write_file($items, $filename);
+				$list->save($items);
 				header ("Location: todo-list.php");
 			}
 
 
-			if(isset($_GET['remove'])){
-				$NoItem = $_GET['remove'];
-				unset($items[$NoItem]);
-				write_file($items, $filename);
-				header ("Location: todo-list.php");
+			if (isset($_GET['remove'])) {
+				$archiveItem = array_splice($items, $_GET['remove'], 1);
+				$archives = array_merge($archives, $archiveItem);
+				$archiveFile->save($archives);
+				$list->save($items);
+				header("Location: todo-list.php");
 				exit(0);
+
+
+
+
+				// $key = ($_GET['remove']);
+				// unset($items[$key]);
+				// $list->save($items);
+				// header("Location: todo-list.php");
+				// exit(0);
 			}
+			
 
 
 			// Verify there were uploaded files and no errors
 			if (count($_FILES) > 0 && $_FILES['UploadFile']['error'] == 0 && $_FILES['UploadFile']['type'] == 'text/plain' ){
-			    // Set the destination directory for uploads
-			    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
-			    // Grab the filename from the uploaded file by using basename
-			    $uploadedFile = basename($_FILES['UploadFile']['name']);
-			    // Create the saved filename using the file's original name and our upload directory
-			    $saved_filename = $upload_dir . $uploadedFile;
-			    // Move the file from the temp location to our uploads directory
-			    move_uploaded_file($_FILES['UploadFile']['tmp_name'], $saved_filename);
+			 	if($_FILES['UploadFile']['error'] != 0) {
+					$errorMessage = 'ERROR UPLOADING FILE.';
+				} elseif ($_FILES['UploadFile']['type'] != 'text/plain') {
+					$errorMessage = 'ERROR: INVALID FILE TYPE.';
+				} else {
+					$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+					$filename = basename($_FILES['UploadFile']['name']);
+					$saved_filename = $upload_dir . $filename;
+					move_uploaded_file($_FILES['UploadFile']['tmp_name'], $saved_filename);
+					$uploadedList = new Filestore($saved_filename);
+					$fileContents = $uploadedList->read();	
+
+					if (isset($_POST['submit'])) {
+						$items = $fileContents;
+					} else {
+						$items = array_merge($items, $fileContents);
+					}
+
+					$list->save($items);	
+					}
 
 			}
-
-			// Check if we saved a file
-			if (isset($saved_filename)){
-				$handle = open_file($saved_filename);
-			    $Merged = array_merge($items, $handle);
-			   	// var_dump($Merged);
-			    // if (isset ($_POST["overwrite"] == 'true')){;
-			    write_file ($Merged, $filename);
-			    header ("Location: todo-list.php");
 			
-				}    
+
+
+
+
+
+
+
+
+
+
+			
+
+			
+			
 			
 
 		?>
-	</ul>  
+	
 
 
 	
@@ -106,7 +112,7 @@
 <body>
 
 	<h1>TODO LIST</h1>
-		<?if(count($items) > 0): ?>
+		
 		<ul>
 			<? foreach ($items as $key => $item): ?>
 				<li><?= $item ?>
@@ -114,10 +120,7 @@
 				</li>
 			<? endforeach; ?>
 		</ul>	
-					
-			<? else: ?>
-				<h2>You are done, go find something to do!!</h2>
-			<? endif; ?>		
+			
 		
 
 
