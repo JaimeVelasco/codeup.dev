@@ -4,10 +4,13 @@
 </head>
 <body>
 	<script type="text/javascript">
-		var Person = {};
+		var Person = {
+			
+			firstName: 'Jaime',
+			LastName: 'Velasco'
+		};
 
-			Person.firstName = 'Jaime';
-			Person.LastName = 'Velasco';
+			
 
 			Person.sayHello = function(){
 				alert('Hello! My name is ' + this.firstName + ' ' + this.LastName)
