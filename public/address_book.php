@@ -20,7 +20,6 @@ try{
 		$entry['City'] = $_POST['City'];
 		$entry['State'] = $_POST['State'];
 		$entry['ZipCode'] = $_POST['ZipCode'];
-		$entry['Phone'] = $_POST['Phone'];
 		// Organizing error messages
 		foreach ($entry as $key => $value) {
 			if (empty($value)) {
@@ -33,6 +32,12 @@ try{
 				throw new InvaidInputException("$key value is greater than 125 characters.");
 			}
 		}
+
+		$entry['Phone'] = $_POST['Phone'];
+		foreach ($_POST as $key => $value) {
+			$_POST[$key] = ($value);
+		}
+
 		// If there are no errors, go ahead and save the address book
 		if (empty($errors)) {
 			array_push($book_array, array_values($entries));
