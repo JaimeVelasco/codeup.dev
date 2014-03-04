@@ -9,7 +9,7 @@ $book = new AddressDataStore('Data/address_book.csv');
 $book_array = $book->read();
 $error = '';
 
-
+class InvaidInputException extends Exception{}
 
 try{
 	// Error validation
@@ -20,16 +20,17 @@ try{
 		$entry['City'] = $_POST['City'];
 		$entry['State'] = $_POST['State'];
 		$entry['ZipCode'] = $_POST['ZipCode'];
+		$entry['Phone'] = $_POST['Phone'];
 		// Organizing error messages
 		foreach ($entry as $key => $value) {
 			if (empty($value)) {
 				$error[] =" ucfirst($key)" . " is not found";
-				throw new Exception("$key value is empty. Please fill it.");
+				throw new InvaidInputException("$key value is empty.");
 			} else {
 				$entries[] = $value;
 			}
 			if (strlen($value) > 125) {
-				throw new Exception("$key value is greater than 125 characters.");
+				throw new InvaidInputException("$key value is greater than 125 characters.");
 			}
 		}
 		// If there are no errors, go ahead and save the address book
@@ -38,8 +39,8 @@ try{
 			$book->save($book_array);
 		}
 	} 
-} catch (Exception $e) {
-	echo "<font color='red'><h2>DO NOT FORGET TO ENTER" . ' ' . 	($key) ." </h2></font>";
+} catch (InvaidInputException $e) {
+	echo "<font color='red'><h2>DO NOT FORGET TO ENTER" . " " . ($key) ." </h2></font>";
 }
 
 

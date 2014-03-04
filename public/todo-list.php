@@ -1,5 +1,5 @@
 
-	<?php
+<!-- 	<?php
 
 	echo "<p>GET:</p>";
 	var_dump($_GET);
@@ -10,7 +10,7 @@
 	echo "<p>FILES:</p>";
 	var_dump($_FILES);
 
-	?>
+	?> -->
 
 
 
@@ -26,27 +26,22 @@ $archiveFile = new Filestore('Data/archives.txt');
 $archives = $archiveFile->read();
 $error = '';
 
-// class InvaidInputException extends Exception{}
+class InvaidInputException extends Exception{}
 
-// function CheckValidInput($_POST)
-// {	
-// 	if(!is_string($_POST))
-
-// }
 
 
 
 			if(isset($_POST['NewItem'])){
 				try {
 					if (strlen($_POST['NewItem']) >240 ) {
-						throw new Exception('Please enter something smaller than 240 characters');
+						throw new InvaidInputException('Please enter something smaller than 240 characters');
 					}elseif (empty($_POST['NewItem'])) {
-						throw new Exception ('Please enter an item');
+						throw new InvaidInputException ('Please enter an item');
 					}else{
 						array_push($items, $_POST['NewItem']);
 						$list->save($items);}
-				}catch(Exception $e){		
-					$exeptionMsg = $e->getMessage();
+				}catch(InvaidInputException $e){		
+					$InvalidInputMessage = $e->getMessage();
 					}				
 				}
 			
@@ -123,8 +118,8 @@ $error = '';
 	            <input id="NewItem" name="NewItem" placeholder="new item here." type="text" autofocus='autofocus' >
 	        
 	        <p style="text-transform: uppercase; color: red;">
-				<? if (!empty($exeptionMsg)) : ?>
-				! <?= $exeptionMsg; ?> !
+				<? if (!empty($InvalidInputMessage)) : ?>
+				! <?= $InvalidInputMessage; ?> !
 				<? endif; ?>
 			</p>    
 
