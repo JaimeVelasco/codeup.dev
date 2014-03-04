@@ -7,27 +7,46 @@ class AddressDataStore extends Filestore {
 
 $book = new AddressDataStore('Data/address_book.csv');
 $book_array = $book->read();
-$error = ''	;
+$error = '';
 
 
 
-if (!empty($_POST['Name']) && 
-	!empty($_POST['Address']) && 
-	!empty($_POST['City']) &&
- 	!empty($_POST['State']) && 
- 	!empty($_POST['ZipCode'])) {
-	// Define new entry to the array
-		$newEntry = [$_POST['Name'], 
-					 $_POST['Address'], 
-					 $_POST['City'], 
-					 $_POST['State'], 
-					 $_POST['ZipCode'], 
-					 $_POST['Phone']];
-		array_push($book_array, $newEntry);
-		$book->save($book_array);
-	} elseif (isset($_POST['submit'])) {
-		$error = 'You forgot something!!';
-	} elseif (isset($_GET['key'])) {
+try{
+	// Error validation
+	if (!empty($_POST)) {
+		$entry = [];
+		$entry['Name'] = $_POST['Name'];	
+		$entry['Address'] = $_POST['Address'];
+		$entry['City'] = $_POST['City'];
+		$entry['State'] = $_POST['State'];
+		$entry['ZipCode'] = $_POST['ZipCode'];
+		// Organizing error messages
+		foreach ($entry as $key => $value) {
+			if (empty($value)) {
+				$error[] =" ucfirst($key)" . " is not found";
+				throw new Exception("$key value is empty. Please fill it.");
+			} else {
+				$entries[] = $value;
+			}
+			if (strlen($value) > 125) {
+				throw new Exception("$key value is greater than 125 characters.");
+			}
+		}
+		// If there are no errors, go ahead and save the address book
+		if (empty($errors)) {
+			array_push($book_array, array_values($entries));
+			$book->save($book_array);
+		}
+	} 
+} catch (Exception $e) {
+	echo "<font color='red'><h2>DO NOT FORGET TO ENTER" . ' ' . 	($key) ." </h2></font>";
+}
+
+
+
+
+
+	if (isset($_GET['key'])) {
 		//Remove item from address_book array 
 		//Save array to data storage
 		foreach ($book_array as $key => $data) {
@@ -38,15 +57,15 @@ if (!empty($_POST['Name']) &&
 			}
 		}
 
-if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['type'] == 'text/csv') {
+if (count($_FILES) > 0 && $_FILES['Upload']['error'] == 0 && $_FILES['Upload']['type'] == 'text/csv') {
 	    // Set the destination directory for uploads
 	    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
 	    // Grab the filename from the uploaded file by using basename
-	    $tempfilename = basename($_FILES['file1']['name']);
+	    $tempfilename = basename($_FILES['Upload']['name']);
 	    // Create the saved filename using the file's original name and our upload directory
 	    $newlist->filename = $upload_dir . $tempfilename;
 	    // Move the file from the temp location to our uploads directory
-	    move_uplofile1aded_file($_FILES['file1']['tmp_name'], $newlist->filename);
+	    move_uplofile1aded_file($_FILES['Upload']['tmp_name'], $newlist->filename);
 	    $appendList = $newlist->read();
 	    if (isset($_POST['overwrite']) && $_POST['overwrite'] == "yes") {
 	    	$addressBook = $appendList;
@@ -143,8 +162,8 @@ if (count($_FILES) > 0 && $_FILES['file1']['error'] == 0 && $_FILES['file1']['ty
 
 		<form align="center" method="POST" enctype="multipart/form-data" action="">
 	    	<p>
-	    	    <label for="file1"><h2>File to upload: </h2></label>
-	    	    <input type="file" id="file1" name="file1">
+	    	    <label for="Upload"><h2>File to upload: </h2></label>
+	    	    <input type="file" id="Upload" name="Upload">
 	    	</p>
 	    	<p>
 			    <label for="overwrite">

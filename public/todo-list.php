@@ -1,4 +1,4 @@
-<!-- 
+
 	<?php
 
 	echo "<p>GET:</p>";
@@ -7,8 +7,11 @@
 	echo "<p>POST:</p>";
 	var_dump($_POST);
 
+	echo "<p>FILES:</p>";
+	var_dump($_FILES);
+
 	?>
- -->
+
 
 
 
@@ -21,17 +24,32 @@ $list = new Filestore("Data/todo_list.txt");
 $items = $list->read();
 $archiveFile = new Filestore('Data/archives.txt');
 $archives = $archiveFile->read();
-$errorMessage = '';
+$error = '';
 
-		   
+// class InvaidInputException extends Exception{}
 
-			if(isset($_POST['NewItem']) && !empty($_POST['NewItem'])){
-				$item = htmlspecialchars(strip_tags($_POST['NewItem']));
-				array_push($items, $item);
-				$list->save($items);
-				header ("Location: todo-list.php");
-			}
+// function CheckValidInput($_POST)
+// {	
+// 	if(!is_string($_POST))
 
+// }
+
+
+
+			if(isset($_POST['NewItem'])){
+				try {
+					if (strlen($_POST['NewItem']) >240 ) {
+						throw new Exception('Please enter something smaller than 240 characters');
+					}elseif (empty($_POST['NewItem'])) {
+						throw new Exception ('Please enter an item');
+					}else{
+						array_push($items, $_POST['NewItem']);
+						$list->save($items);}
+				}catch(Exception $e){		
+					$exeptionMsg = $e->getMessage();
+					}				
+				}
+			
 
 			if (isset($_GET['remove'])) {
 				$archiveItem = array_splice($items, $_GET['remove'], 1);
@@ -40,25 +58,15 @@ $errorMessage = '';
 				$list->save($items);
 				header("Location: todo-list.php");
 				exit(0);
-
-
-
-
-				// $key = ($_GET['remove']);
-				// unset($items[$key]);
-				// $list->save($items);
-				// header("Location: todo-list.php");
-				// exit(0);
 			}
 			
-
 
 			// Verify there were uploaded files and no errors
 			if (count($_FILES) > 0 && $_FILES['UploadFile']['error'] == 0 && $_FILES['UploadFile']['type'] == 'text/plain' ){
 			 	if($_FILES['UploadFile']['error'] != 0) {
-					$errorMessage = 'ERROR UPLOADING FILE.';
+					$error = 'ERROR UPLOADING FILE.';
 				} elseif ($_FILES['UploadFile']['type'] != 'text/plain') {
-					$errorMessage = 'ERROR: INVALID FILE TYPE.';
+					$error = 'ERROR: INVALID FILE TYPE.';
 				} else {
 					$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
 					$filename = basename($_FILES['UploadFile']['name']);
@@ -72,28 +80,9 @@ $errorMessage = '';
 					} else {
 						$items = array_merge($items, $fileContents);
 					}
-
 					$list->save($items);	
 					}
-
-			}
-			
-
-
-
-
-
-
-
-
-
-
-			
-
-			
-			
-			
-
+			}			
 		?>
 	
 
@@ -111,11 +100,11 @@ $errorMessage = '';
 
 <body>
 
-	<h1>TODO LIST</h1>
+	<h1 align="center">TODO LIST</h1>
 		
-		<ul>
+		<ulx>
 			<? foreach ($items as $key => $item): ?>
-				<li><?= $item ?>
+				<li align="center"><?= htmlspecialchars(strip_tags($item)); ?>
 				<a href='?remove=<?= $key; ?>'> (Remove) </a>
 				</li>
 			<? endforeach; ?>
@@ -127,12 +116,18 @@ $errorMessage = '';
 
 	
 
-	<h3>Add a new item to the list</h3>
-	    <form method="POST" enctype="multipart/form-data" action="">
+	<h3 align="center">Add a new item to the list</h3>
+	    <form align="center" method="POST" enctype="multipart/form-data" action="">
 	        <p>
-	            <label for="NewItem">New Item</label>
+	            <label align="center" for="NewItem">New Item</label>
 	            <input id="NewItem" name="NewItem" placeholder="new item here." type="text" autofocus='autofocus' >
 	        
+	        <p style="text-transform: uppercase; color: red;">
+				<? if (!empty($exeptionMsg)) : ?>
+				! <?= $exeptionMsg; ?> !
+				<? endif; ?>
+			</p>    
+
 	        <p>
 	        	<input type="submit" value="Add new item">
 	        </p>
@@ -156,7 +151,11 @@ $errorMessage = '';
 </body>
 
 <footer>
-	<p>&copy 2014 Jaime Velasco</p>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-- <p>&copy 2014 Jaime Velasco</p> -->
 
 </footer>
 
