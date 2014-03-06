@@ -88,18 +88,23 @@ class InvaidInputException extends Exception{}
 
 <head>
 
-    <meta charset="utf-8">
-    <title>TODO List</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/todo.css">
+
+
+
+<title>TODO List</title>
 
 </head>
 
 <body>
 
-	<h1 align="center">TODO LIST</h1>
+	<h1>TODO LIST</h1>
 		
-		<ulx>
+		<ul>
+
 			<? foreach ($items as $key => $item): ?>
-				<li align="center"><?= htmlspecialchars(strip_tags($item)); ?>
+				<li><?= htmlspecialchars(strip_tags($item)); ?>
 				<a href='?remove=<?= $key; ?>'> (Remove) </a>
 				</li>
 			<? endforeach; ?>
@@ -111,13 +116,13 @@ class InvaidInputException extends Exception{}
 
 	
 
-	<h3 align="center">Add a new item to the list</h3>
-	    <form align="center" method="POST" enctype="multipart/form-data" action="">
+	<h3>Add a new item to the list</h3>
+	    <form method="POST" enctype="multipart/form-data" action="">
 	        <p>
-	            <label align="center" for="NewItem">New Item</label>
+	            <label for="NewItem">New Item</label>
 	            <input id="NewItem" name="NewItem" placeholder="new item here." type="text" autofocus='autofocus' >
 	        
-	        <p style="text-transform: uppercase; color: red;">
+	        <p>
 				<? if (!empty($InvalidInputMessage)) : ?>
 				! <?= $InvalidInputMessage; ?> !
 				<? endif; ?>

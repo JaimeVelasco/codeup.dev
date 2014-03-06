@@ -1,0 +1,20 @@
+h1, h2, h3 {
+	color:#f43059;
+	text-decoration: underline;
+	text-align: center;
+}
+
+body {
+	background-image: url("/img/zwartevilt.png")
+}
+
+p {
+	color: #30F3F4;
+	text-align: center;
+}
+
+ul {
+	color: #30F3F4;
+	text-align: center;
+	list-style-type: circle;
+} 
