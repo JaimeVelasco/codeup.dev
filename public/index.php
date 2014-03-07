@@ -32,7 +32,7 @@ class InvaidInputException extends Exception{}
                 $archives = array_merge($archives, $archiveItem);
                 $archiveFile->save($archives);
                 $list->save($items);
-                header("Location: todo-list.php");
+                header("Location: index.php");
                 exit(0);
             }
             
@@ -139,10 +139,6 @@ class InvaidInputException extends Exception{}
         </ul>   
             
         
-
-
-
-    
 
     <h3>Add a new item to the list</h3>
         <form method="POST" enctype="multipart/form-data" action="">
