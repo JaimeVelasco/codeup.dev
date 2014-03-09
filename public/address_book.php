@@ -5,7 +5,7 @@ class AddressDataStore extends Filestore {
 
 }
 
-$book = new AddressDataStore('Data/address_book.csv');
+$book = new AddressDataStore('assets/Data/address_book.csv');
 $book_array = $book->read();
 $error = '';
 
@@ -45,7 +45,7 @@ try{
 		}
 	} 
 } catch (InvaidInputException $e) {
-	echo "<font color='red'><h2>DO NOT FORGET TO ENTER" . " " . ($key) ." </h2></font>";
+	echo "<font color='red'><h2>Please enter" . " " . ($key) ." </h2></font>";
 }
 
 
@@ -65,7 +65,7 @@ try{
 
 if (count($_FILES) > 0 && $_FILES['Upload']['error'] == 0 && $_FILES['Upload']['type'] == 'text/csv') {
 	    // Set the destination directory for uploads
-	    $upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+	    $upload_dir = '/vagrant/sites/codeup.dev/public/assets/uploads/';
 	    // Grab the filename from the uploaded file by using basename
 	    $tempfilename = basename($_FILES['Upload']['name']);
 	    // Create the saved filename using the file's original name and our upload directory
