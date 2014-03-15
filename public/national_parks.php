@@ -27,7 +27,6 @@
   </head>
 
   <body>
-
   <?php
     require_once 'mysqlicall.php';
     $sortcol = $_GET['sortcol'];
