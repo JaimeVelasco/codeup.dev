@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 
-    <title>National Parks</title>
+    <title>My Website</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
