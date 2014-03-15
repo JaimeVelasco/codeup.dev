@@ -1,4 +1,4 @@
-
+x
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,15 +37,9 @@
 
   ?>  
 
-    <div class="navbar navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="#">National Parks</a>
         </div>
         <div class="collapse navbar-collapse">
@@ -54,14 +48,15 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul> -->
-        </div><!--/.nav-collapse -->
+        </div>
+        <!--/.nav-collapse -->
       </div>
     </div>
 
     <div class="container">
       <div class="table">
         <div class="col-md-12 table-responsive">
-        <h1>National Parks in the US</h1>
+        <h1>A Selection of 10 National Parks in the US</h1>
               <table class="table table-bordered">
 
                         <thead>
@@ -69,26 +64,26 @@
                                 <th class='col-md-1'>
                                     Park Name
                                     <br>
-                                    <i><a href="?sortcol=name&sortorder=desc" class="fa fa-sort-desc"</i></a>
-                                    <i><a href="?sortcol=name&sortorder=asc" class="fa fa-sort-asc"</i></a>
+                                    <i><a href="?sortcol=name&sortorder=asc" class="fa fa-sort-desc"</i></a>
+                                    <i><a href="?sortcol=name&sortorder=desc" class="fa fa-sort-asc"</i></a>
                                 </th>    
                                 <th class='col-md-1'>
                                     Location
                                     <br>
-                                    <i><a href="?sortcol=location&sortorder=desc" class="fa fa-sort-desc"</i></a>
-                                    <i><a href="?sortcol=location&sortorder=asc" class="fa fa-sort-asc"</i></a>
+                                    <i><a href="?sortcol=location&sortorder=asc" class="fa fa-sort-desc"</i></a>
+                                    <i><a href="?sortcol=location&sortorder=desc" class="fa fa-sort-asc"</i></a>
                                 </th>
                                 <th class='col-md-2'>
                                     Date Stablished
                                     <br>
-                                    <i><a href="?sortcol=date_established&sortorder=desc" class="fa fa-sort-desc"</i></a>
-                                    <i><a href="?sortcol=date_established&sortorder=asc" class="fa fa-sort-asc"</i></a>
+                                    <i><a href="?sortcol=date_established&sortorder=asc" class="fa fa-sort-desc"</i></a>
+                                    <i><a href="?sortcol=date_established&sortorder=desc" class="fa fa-sort-asc"</i></a>
                                 </th>
                                 <th class='col-md-1'>
                                     Area in Acres
                                     <br>
-                                    <i><a href="?sortcol=area_in_acres&sortorder=desc" class="fa fa-sort-desc"</i></a>
-                                    <i><a href="?sortcol=area_in_acres&sortorder=asc" class="fa fa-sort-asc"</i></a>
+                                    <i><a href="?sortcol=area_in_acres&sortorder=asc" class="fa fa-sort-desc"</i></a>
+                                    <i><a href="?sortcol=area_in_acres&sortorder=desc" class="fa fa-sort-asc"</i></a>
                                 </th>
                                 <th class='col-md-6'>
                                     Description
@@ -106,6 +101,19 @@
                                 }
                                 echo "</tr>";
                             };  
+
+
+
+
+
+
+                        // $stmt = $mysqli->prepare("SELECT name, location, date_established, area_in_acres, description
+                        //                             FROM national_parks WHERE name = ? AND location = ? AND date_established = ?
+                        //                             AND description = ? ORDER BY $sortcol $sortorder");
+
+                        // $stmt->bind_param( "sssds" $name, $location, $date_established, $area_in_acres, $description);
+
+                        // $stmt->execute();
                         
                         ?>
                 </table> 
