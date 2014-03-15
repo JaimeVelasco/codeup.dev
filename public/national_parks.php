@@ -1,4 +1,3 @@
-x
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,7 +30,6 @@ x
 
   <?php
     require_once 'mysqlicall.php';
-
     $sortcol = $_GET['sortcol'];
     $sortorder = $_GET['sortorder'];
 
