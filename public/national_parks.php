@@ -2,13 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 
-    <title>My Website</title>
+    <title>National Parks</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -24,20 +23,21 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
 
-  <body>
-  <?php
+<?php
     require_once 'mysqlicall.php';
     $sortcol = $_GET['sortcol'];
     $sortorder = $_GET['sortorder'];
+?>  
+  </head>
 
-  ?>  
+  <body>
+  
 
     <div class="navbar navbar-static-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">National Parks</a>
+          <a class="navbar-brand" href="http://photojv.com/">Home</a>
         </div>
         <div class="collapse navbar-collapse">
           <!-- <ul class="nav navbar-nav">
