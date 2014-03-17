@@ -16,26 +16,26 @@ if ((isset($_GET['sortcol'])) && (in_array($_GET['sortcol'], $validCols))) {
   if ((isset($_GET['sortorder'])) && ($_GET['sortorder'] == 'desc')) {
     $sortOrder = 'desc';
   }
+} 
 $result = $mysqli->query("SELECT name, location, date_established, area_in_acres, description FROM national_parks ORDER BY $sortCol $sortOrder");
 
-} else {
-    $result = $mysqli->query("SELECT name, location, date_established, area_in_acres, description FROM national_parks");
-}
+
+
 
 if (!empty($_POST)) {
 
     try {   
         // Set variables
         if (empty($_POST['name'])) {
-            throw new Exception('\'Park Name\' IS EMPTY. Please fill out again.');
+            throw new Exception('\'Park Name\' field required.');
         } elseif (empty($_POST['location'])) {
-            throw new Exception('\'Location\' IS EMPTY. Please fill out again.');
+            throw new Exception('\'Location\' field required.');
         } elseif (empty($_POST['description'])) {
-            throw new Exception('\'Description\' IS EMPTY. Please fill out again.');
+            throw new Exception('\'Description\' field required.');
         } elseif (empty($_POST['date_established'])) {
-            throw new Exception('\'Date Established\' IS EMPTY. Please fill out again.');
+            throw new Exception('\'Date Established\' field required.');
         } elseif (empty($_POST['area_in_acres'])) {
-            throw new Exception('\'Area\' IS EMPTY. Please fill out again.');
+            throw new Exception('\'Area\' field required.');
         } else {
             $name = $_POST['name'];
             $location = $_POST['location'];
@@ -86,14 +86,6 @@ if (!empty($_POST)) {
     <div class="navbar-header">
       <a class="navbar-brand" href="http://photojv.com/">Home</a>
     </div>
-    <div class="collapse navbar-collapse">
-      <!-- <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul> -->
-    </div>
-    <!--/.nav-collapse -->
   </div>
 </div>
 
@@ -165,26 +157,26 @@ if (!empty($_POST)) {
                             <th class='col-md-1'>
                                 Park Name
                                 <br>
-                                <i><a href="?sortcol=name&sortorder=asc" class="fa fa-sort-desc"</i></a>
-                                <i><a href="?sortcol=name&sortorder=desc" class="fa fa-sort-asc"</i></a>
+                                <i><a href="?sortcol=name&amp;sortorder=asc" class="fa fa-sort-desc"</i></a>
+                                <i><a href="?sortcol=name&amp;sortorder=desc" class="fa fa-sort-asc"</i></a>
                             </th>    
                             <th class='col-md-1'>
                                 Location
                                 <br>
-                                <i><a href="?sortcol=location&sortorder=asc" class="fa fa-sort-desc"</i></a>
-                                <i><a href="?sortcol=location&sortorder=desc" class="fa fa-sort-asc"</i></a>
+                                <i><a href="?sortcol=location&amp;sortorder=asc" class="fa fa-sort-desc"</i></a>
+                                <i><a href="?sortcol=location&amp;sortorder=desc" class="fa fa-sort-asc"</i></a>
                             </th>
                             <th class='col-md-2'>
                                 Date Stablished
                                 <br>
-                                <i><a href="?sortcol=date_established&sortorder=asc" class="fa fa-sort-desc"</i></a>
-                                <i><a href="?sortcol=date_established&sortorder=desc" class="fa fa-sort-asc"</i></a>
+                                <i><a href="?sortcol=date_established&amp;sortorder=asc" class="fa fa-sort-desc"</i></a>
+                                <i><a href="?sortcol=date_established&amp;sortorder=desc" class="fa fa-sort-asc"</i></a>
                             </th>
                             <th class='col-md-1'>
                                 Area in Acres
                                 <br>
-                                <i><a href="?sortcol=area_in_acres&sortorder=asc" class="fa fa-sort-desc"</i></a>
-                                <i><a href="?sortcol=area_in_acres&sortorder=desc" class="fa fa-sort-asc"</i></a>
+                                <i><a href="?sortcol=area_in_acres&amp;sortorder=asc" class="fa fa-sort-desc"</i></a>
+                                <i><a href="?sortcol=area_in_acres&amp;sortorder=desc" class="fa fa-sort-asc"</i></a>
                             </th>
                             <th class='col-md-6'>
                                 Description
