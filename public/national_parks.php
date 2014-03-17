@@ -1,3 +1,64 @@
+<?php
+require_once 'mysqlicall.php';
+
+// Set default values for Query if GET is not empty
+$sortCol = 'name';
+$sortOrder = 'asc';
+
+$validCols = ['name', 'location', 'description', 'date_established', 'area_in_acres'];
+
+// this handles the GET links used to sort by which column and which direction asc or desc
+
+
+if ((isset($_GET['sortcol'])) && (in_array($_GET['sortcol'], $validCols))) {  
+  $sortCol = $_GET['sortcol'];
+
+  if ((isset($_GET['sortorder'])) && ($_GET['sortorder'] == 'desc')) {
+    $sortOrder = 'desc';
+  }
+$result = $mysqli->query("SELECT name, location, date_established, area_in_acres, description FROM national_parks ORDER BY $sortCol $sortOrder");
+
+} else {
+    $result = $mysqli->query("SELECT name, location, date_established, area_in_acres, description FROM national_parks");
+}
+
+if (!empty($_POST)) {
+
+    try {   
+        // Set variables
+        if (empty($_POST['name'])) {
+            throw new Exception('\'Park Name\' IS EMPTY. Please fill out again.');
+        } elseif (empty($_POST['location'])) {
+            throw new Exception('\'Location\' IS EMPTY. Please fill out again.');
+        } elseif (empty($_POST['description'])) {
+            throw new Exception('\'Description\' IS EMPTY. Please fill out again.');
+        } elseif (empty($_POST['date_established'])) {
+            throw new Exception('\'Date Established\' IS EMPTY. Please fill out again.');
+        } elseif (empty($_POST['area_in_acres'])) {
+            throw new Exception('\'Area\' IS EMPTY. Please fill out again.');
+        } else {
+            $name = $_POST['name'];
+            $location = $_POST['location'];
+            $date_established = $_POST['date_established']; 
+            $area_in_acres = $_POST['area_in_acres'];
+            $description = $_POST['description'];            
+
+            $stmt = $mysqli->prepare("INSERT INTO national_parks (name, location, date_established, area_in_acres, description ) VALUES (?, ?, ?, ?, ?)");
+          
+            $stmt->bind_param("sssds", $name, $location, $date_established, $area_in_acres, $description);
+
+            $stmt->execute();
+          
+            $mysqli->close();
+        }
+    } catch (Exception $e) {
+        $errorMessage = $e->getMessage();
+    }
+}
+
+?>
+       
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,6 +67,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+    <link href="assets/css/datepicker.css" rel="stylesheet">
 
     <title>National Parks</title>
 
@@ -15,24 +77,13 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/parks.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-<?php
-    require_once 'mysqlicall.php';
-    $sortcol = $_GET['sortcol'];
-    $sortorder = $_GET['sortorder'];
-?>  
   </head>
 
   <body>
-  
+
+        
+
 
     <div class="navbar navbar-static-top" role="navigation">
       <div class="container">
@@ -51,9 +102,64 @@
     </div>
 
     <div class="container">
-      <div class="table">
+        <? if(!empty($errorMessage)): ?> 
+        <div class="alert alert-danger" data-dismiss="alert"><?= $errorMessage; ?>
+        </div>
+    <? endif; ?>
+        <div class="col-md-12">
+            <div class="form-horizontal" >
+                <form method="POST" action="national_parks.php" role="form">
+                  <div class="form-group">
+                     <label for="name" class="col-sm-2 control-label">Park Name</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" name="name" id="name" placeholder="Park Name"value="<?php if(isset($_POST['name'])){ echo $_POST['name'];}else{ echo '';}?>" required>
+                  </div>
+                  </div>
+                  <div class="form-group">
+                     <label for="location" class="col-sm-2 control-label">Location</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" name="location" id="location" placeholder="location" value="<?php if(isset($_POST['location'])){ echo $_POST['location'];}else{ echo '';}?>" required>
+                  </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="date_established" class="col-sm-2 control-label">Date Established</label>
+                  <div class="col-sm-10">
+                     <input type="date" class="form-control" name="date_established" id="date_established" data-date-format="yyyy/mm/dd" placeholder="yyyy/mm/dd" value="<?php if(isset($_POST['date_established'])){ echo $_POST['date_established'];}else{ echo '';}?>" required>
+                  </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="area_in_acres" class="col-sm-2 control-label">Area</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" name="area_in_acres"
+                      id="area_in_acres" placeholder="area_in_acres" value="<?php if(isset($_POST['area_in_acres'])){ echo $_POST['area_in_acres'];}else{ echo '';}?>" required>
+                  </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="description" class="col-sm-2 control-label">Description</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" 
+                      name= "description" id="description" placeholder="Description" value="<?php if(isset($_POST['description'])){ echo $_POST['description'];}else{ echo '';}?>" required>
+                  </div>
+                  </div>
+
+                  <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                     <button type="submit" class="btn btn-default">submit</button>
+                  </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+    
+
+
+    <div class="table">
         <div class="col-md-12 table-responsive">
-        <h1>A Selection of 10 National Parks in the US</h1>
+            <h1>A Selection of 10 National Parks in the US</h1>
               <table class="table table-bordered">
 
                         <thead>
@@ -87,32 +193,19 @@
                                 </th>
                             </tr>
                         </thead>
-                        <?php 
-                        $result = $mysqli->query("SELECT name, location, date_established, area_in_acres, description
-                                                  FROM national_parks ORDER BY $sortcol $sortorder");
+                       
+                      <?php while ($row = $result->fetch_assoc()): ?>
+                      <tr>  
+                        <td> <?= $row['name']; ?> </td>
+                        <td> <?= $row['location']; ?> </td>
+                        <td> <?= $row['date_established']; ?> </td>
+                        <td> <?= $row['area_in_acres']; ?> </td>
+                        <td> <?= $row['description']; ?> </td>
+                    <?php endwhile ?>  
 
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            foreach ($row as $park) {
-                                echo "<td>$park</td>";
-                                }
-                                echo "</tr>";
-                            };  
-
-
-
-
-
-
-                        // $stmt = $mysqli->prepare("SELECT name, location, date_established, area_in_acres, description
-                        //                             FROM national_parks WHERE name = ? AND location = ? AND date_established = ?
-                        //                             AND description = ? ORDER BY $sortcol $sortorder");
-
-                        // $stmt->bind_param( "sssds" $name, $location, $date_established, $area_in_acres, $description);
-
-                        // $stmt->execute();
-                        
-                        ?>
+                    
+                       
+                       
                 </table> 
             </div>
       </div>
@@ -124,5 +217,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="assets/js/bootstrap-datepicker.js">
+    ('.datepicker').datepicker();
+    </script>
   </body>
 </html>
