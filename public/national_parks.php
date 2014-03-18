@@ -191,6 +191,7 @@ if (!empty($_POST)) {
                     <td> <?= $row['date_established']; ?> </td>
                     <td> <?= $row['area_in_acres']; ?> </td>
                     <td> <?= $row['description']; ?> </td>
+                  </tr>  
                 <?php endwhile ?>  
 
                 
