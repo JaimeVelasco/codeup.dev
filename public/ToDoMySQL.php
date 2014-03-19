@@ -279,10 +279,10 @@ $('#sidebar').affix({
 
 // alerts hide after 5 seconds
 
-function createAutoClosingAlert(selector, delay) {
-   var alert = $(selector).alert();
-   window.setTimeout(function() { alert.alert('close') }, delay);
-}
+// function createAutoClosingAlert(selector, delay) {
+//    var alert = $(selector).alert();
+//    window.setTimeout(function() { alert.alert('close') }, delay);
+// }
 
 </script>
 
