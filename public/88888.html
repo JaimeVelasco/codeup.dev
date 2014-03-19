@@ -1,8 +1,6 @@
 
 <?php 
 
-
-
 //connect to database
 $mysqli = @new mysqli('127.0.0.1', 'codeup', 'password', 'ToDoList');
 
@@ -71,6 +69,7 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
 ?>
 
 
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -83,7 +82,6 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<link href='http://fonts.googleapis.com/css?family=Lato:100,400,900' rel='stylesheet' type='text/css'>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -94,44 +92,6 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
   <title></title>
             <style type="text/css">
               /* bootstrap 3 helpers */
-
-
-
-          body {
-            font-family: 'Lato', sans-serif; 
-            font-weight:900;
-            font-size: 18px;
-          }    
-
-          h1  {
-            font-family: 'Lato', sans-serif; 
-            font-weight:100;
-            font-size: 62px;
-            color: orange;
-          }    
-
-          h2  {
-            font-family: 'Lato', sans-serif; 
-            font-weight:100;
-            font-size: 43px;
-            color: orange;
-          }    
-          table  {
-            font-family: 'Lato', sans-serif; 
-            font-weight:100;
-            font-size: 20px;
-
-          }    
-
-         button  {
-            font-family: 'Lato', sans-serif; font-weight:100;
-            font-size: 10px;
-          } 
-
-         #placeholder  {
-            font-family: 'Lato', sans-serif; font-weight:100;
-            font-size: 12px;
-          }       
 
           .navbar-form input, .form-inline input {
             width:auto;
@@ -167,12 +127,12 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
     <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <h2><a href="#" title="scroll down for your viewing pleasure">Jaime Velasco</a>
-          <p class="lead">Junior Developer</p></h2>
+        <h1><a href="#" title="scroll down for your viewing pleasure">Bootstrap 3 Affix</a>
+          <p class="lead">Fixed (Sticky) Sidebar Panel</p></h1>
       </div>
-      <div class="col-md-6 ">
+      <div class="col-md-6">
         <div class="pull-right hidden-sm">    
-          <h2><a href="#" title="Placeholder fo login sistem"><i class="fa fa-pencil">  </i></a><a href="#" title="A button that makes something awesome"><i class="fa fa-list"></i></a></h2>
+          <h1><a href="#"><i class="glyphicon glyphicon-user"></i> <i class="glyphicon glyphicon-chevron-down"></i></a></h1>
         </div>
       </div>
     </div>
@@ -190,15 +150,14 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
                       <h2>Add Items</h2>
                       <form class="form-horizontal" role="form" action="ToDoMySQL.php" method="POST">
                         <div class="form-group-">
-                          
-                          <div class="col-sm-12">
-                            <textarea class="form-control" rows="3" id="todo" placeholder="New To Do"  name="todo" autofocus="autofocus"></textarea>
-                            <!-- <input type="text" name="todo" class="form-control" rows="6" id="todo" placeholder="New To Do" autofocus="autofocus">-->
+                          <label for="todo" class="col-sm-6 control-label">New To do</label>
+                          <div class="col-sm-6">
+                            <textarea name="todo" class="form-control" rows="6" id="todo" placeholder="New To Do" autofocus="autofocus"</textarea>
                           </div>
                         </div>
                         <div class="form-group">
-                          <div>
-                            <button type="submit" class="btn btn-default" >Add To do</button>
+                          <div class="col-sm-4">
+                            <button type="submit" class="btn btn-default">Add To do</button>
                           </div>
                         </div>
                       </form>
@@ -230,7 +189,7 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
                       <? while($todo = $todos->fetch_assoc()): ?>
                         <tr>
                           <td><?= $todo['Item']; ?></td>
-                          <td><i class="fa fa-trash-o" onclick="removeById(<?= $todo['id']; ?>)"></i></td>
+                          <td><button class="btn btn-danger btn-sm pull-right" onclick="removeById(<?= $todo['id']; ?>)">Remove</button></td>
                         </tr>
                       <? endwhile; ?>
                     </table>
@@ -250,39 +209,13 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
     </div>
     </div>
 </div>
-
-
-<form id="removeForm" action="ToDoMySQL.php" method="post">
-  <input id="removeId" type="hidden" name="remove" value="">
-</form>
-
 <script type="text/javascript">
-//remove items
-var form = document.getElementById('removeForm');
-  var removeId = document.getElementById('removeId');
-
-  function removeById(id) {
-    if(confirm('Are you sure you want to remove item?')) {
-    removeId.value = id;
-    form.submit();
-    }
-  }
-
-
-//sidebar
-$('#sidebar').affix({
-    offset: {
-      top: $('header').height()
-    }
-  }); 
-
-
-// alerts hide after 5 seconds
-
-function createAutoClosingAlert(selector, delay) {
-   var alert = $(selector).alert();
-   window.setTimeout(function() { alert.alert('close') }, delay);
-}
+    
+    $('#sidebar').affix({
+      offset: {
+        top: $('header').height()
+      }
+    }); 
 
 </script>
 
