@@ -29,6 +29,11 @@
   display: none;
 }
 
+#national-parks, #state-parks-texas, #national-parks-mexico {
+    display: show;
+}
+   
+
 
 </style>
 
@@ -59,61 +64,31 @@
       </div>
     </div> -->
 
-<!-- <div class="container">
+<div class="container">
 
 
   <div class="col-md-12 text-center">
 
 
-      <div>
+      <div class="row">
          <dl>
-            <dt id="toggle">Acadia I</dt>
-              <dd>
+            <dt>Acadia I</dt>
+              <dd id="toggle">
                 Covering most of Mount Desert Island and other coastal islands, Acadia features the tallest mountain on the Atlantic coast of the United States, granite peaks, ocean shoreline, woodlands, and lakes. There are freshwater, estuary, forest, and intertidal habitats.
               </dd>
             <dt>American Samoa</dt>
-              <dd>
+              <dd id="toggle">
                 The southernmost national park is on three Samoan islands and protects coral reefs, rainforests, volcanic mountains, and white beaches. The area is also home to flying foxes, brown boobies, sea turtles, and 900 species of fish.
               </dd>
               <dt>Arches</dt>
-              <dd>
+              <dd id="toggle">
                 This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
               </dd>
               <dt>Arches</dt>
-              <dd>
+              <dd id="toggle">
                 This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
               </dd>
-              <dt>Arches</dt>
-              <dd>
-                This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
-              </dd>
-              <dt>Arches</dt>
-              <dd>
-                This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
-              </dd>
-              <dt id="toggle">Arches</dt>
-               <dd>
-                This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
-              </dd>
-
-        </dl>
-        <a href="#" id="hide">Hide</a>
-        <br>
-        <a href="#" id="toggle">Toggle Invisible</a>
-
-    </div>
-         -->
-
-
-
-     
-
-
-
-
-
-
-
+        
 
 
   </div><!-- /.container -->
@@ -124,13 +99,14 @@
 <div class="container">
 
 
-  <div class="col-md-4 text-center">
+  <div class="col-md-12 text-center">
 
+        <h1>Parks List</h1>
 
-           <div>
+           <div class="col-md-4 text-center">
 
-                    <h1>Parks List</h1>
-                    <h3>National Parks</h3>
+                    
+                    <h3 id="national-parks-toggle">National Parks</h3>
                     <ul id="national-parks">
                         <li>Arches</li>
                         <li>Badlands</li>
@@ -138,7 +114,9 @@
                         <li>Denali</li>
                         <li>Everglades</li>
                     </ul>
-                    <h3>State Parks of Texas</h3>
+           </div>
+           <div class="col-md-4 text-center">
+                    <h3 id="state-parks-texas-toggle">State Parks of Texas</h3>
                     <ul id="state-parks-texas">
                         <li>Abilene</li>
                         <li>Big Bend</li>
@@ -146,7 +124,9 @@
                         <li>Davis Mountains</li>
                         <li>Enchanted Rock</li>
                     </ul>
-                    <h3>National Parks of Mexico</h3>
+           </div>
+           <div class="col-md-4 text-center">
+                    <h3  id="national-parks-mexico-toggle">National Parks of Mexico</h3>
                     <ul id="national-parks-mexico">
                         <li>Desierto de los Leones</li>
                         <li>Iztaccíhuatl-Popocatépetl</li>
@@ -154,7 +134,7 @@
                         <li>Nevado de Colima</li>
                         <li>Cumbres de Majalca</li>
                     </ul>
-
+           </div>
                 </div>
            </div>
      </div>
@@ -162,48 +142,56 @@
   <script src="assets/js/jquery-1.11.0.js"></script>
   <script type="text/javascript">
 
-  // $('document').ready(function() {
-  //     $('#hide').click(function(event) {
-  //       event.preventDefault();
-  //         $('dd').addClass('invisible');
-  //     });
+
+
+// toggle  hide/show when clicking <dt>
+    $('document').ready(function() {
+
+
+        $('dt').click(function() {
+        $(this).next().fadeToggle(1000);
+    });
+
+        $('h3').click(function() {
+        $(this).next().fadeToggle(1000);
+    });
+
+
+  // hide <li> when click
+    // $('li').click(function() {
+    //     $(this).parent().hide();
+    // });
+      
+
+
+  // //Toggle hide and show when clicking headers
+  //   $('#national-parks-toggle').click(function() {
+  //       $('#national-parks').toggle();
   //   });
-
-
-
-  // $('document').ready(function() {
-  //     $('#toggle').click(function(event) {
-  //       // event.preventDefault();
-  //         $('dd').toggleClass('invisible');
-          
-  //     });
+  //   $('#state-parks-texas-toggle').click(function() {
+  //       $('#state-parks-texas').toggle();
   //   });
+  //   $('#national-parks-mexico-toggle').click(function() {
+  //       $('#national-parks-mexico').toggle();
+  //   });
+       
 
 
-
-    $('document').ready(function(){
-      $('li').click(function() {
-          $(this).parent().addClass('invisible');
-      });
-   });     
-
-
-
-  
-      // $('#state-parks-texas').children().first().css('font-weight', 'bold');
-      // $('#national-parks').children().first().css('font-weight', 'bold');
-      // $('#national-parks-mexico').children().first().css('font-weight', 'bold');
- 
-
-
-
-
-
+  // MAke first element of each list bold
      $('ul').each(function(){
          $(this).children().first().css('font-weight', 'bold');
        
      });
- 
+
+//FadeOut <h2> on click
+     $('h2').on('click', function() {
+        $(this).fadeOut(1000);
+     });
+
+
+
+
+}); 
 
   </script>
     

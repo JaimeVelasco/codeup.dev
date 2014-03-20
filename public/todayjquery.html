@@ -1,0 +1,109 @@
+<html>
+<head>
+	<title>jQuery</title>
+</head>
+<body>
+			<h3>National Parks</h3>
+			<ul id="national-parks">
+			    <li>Arches</li>
+			    <li>Badlands</li>
+			    <li>Carlsbad Caverns</li>
+			    <li>Denali</li>
+			    <li>Everglades</li>
+			</ul>
+			<h3>State Parks of Texas</h3>
+			<ul id="state-parks-texas">
+			    <li>Abilene</li>
+			    <li>Big Bend</li>
+			    <li>Choke Canyon</li>
+			    <li>Davis Mountains</li>
+			    <li>Enchanted Rock</li>
+			</ul>
+</body>
+</html>
+
+
+<script src="assets/js/jquery-1.11.0.js"></script>
+<script type="text/javascript">
+
+
+	// $('document').ready(function(){
+	// 	$('li').each(function(){
+	// 		console.log(this);
+	// 		var contents = $(this).html();
+	// 		console.log(contents);
+	// 	});
+	// });
+
+
+
+
+
+	// $('document').ready(function(){
+	// 	$('li').each(function(index, element){
+			
+	// 		var contents = $(element).html();
+	// 		console.log(index + '|' + contents);
+	// 	});
+	// });
+
+
+
+
+
+
+	// $('document').ready(function(){
+	// 	$('li').each(function(index, element){
+	// 		var row = $(element);
+	// 		if(index % 2 == 0) {
+	// 			row.css('background-color', 'FFF');
+	// 		}else{
+	// 			row.css('background-color', 'F3f3f3');
+	// 		}
+	// 	});
+	// });
+
+
+
+	$('document').ready(function(){
+		$('#state-parks-texas').children().first().css('background-color', '#F1F1F1');
+		$('#national-parks').children().first().css('background-color', '#F1F1F1');
+					
+		});
+
+
+
+
+	
+
+
+	// $('document').ready(function(){
+	// 	$('#national-parks').children().each(function(index){
+	// 		if(index % 2 == 0) {
+	// 			$(this).css('font-weight', 'bold');	
+	// 			}
+	// 	});
+	// });
+
+	// $('document').ready(function(){
+	// 	$('#state-parks-texas').children().each(function(index){
+	// 		if(index % 2 == 0) {
+	// 			$(li).css('background-color', 'yellow');	
+	// 			}
+	// 	});
+	// });
+
+
+
+
+
+
+
+	// $('document').ready(function(){
+	// 	var row = $('li')
+	// 	row.css('background-color', 'yellow');
+	// 	row.parent().css('background-color', 'lightgray');
+
+	// 	});
+	
+</script>

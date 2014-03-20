@@ -85,6 +85,7 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 <link href='http://fonts.googleapis.com/css?family=Lato:100,400,900' rel='stylesheet' type='text/css'>
 
+<script src="assets/js/jquery-1.11.0.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
@@ -92,6 +93,7 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
 
 
   <title></title>
+
             <style type="text/css">
               /* bootstrap 3 helpers */
 
@@ -99,7 +101,7 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
 
           body {
             font-family: 'Lato', sans-serif; 
-            font-weight:900;
+            font-weight:400;
             font-size: 18px;
           }    
 
@@ -128,7 +130,7 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
             font-size: 10px;
           } 
 
-         #placeholder  {
+         .placeholder  {
             font-family: 'Lato', sans-serif; font-weight:100;
             font-size: 12px;
           }       
@@ -172,7 +174,7 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
       </div>
       <div class="col-md-6 ">
         <div class="pull-right hidden-sm">    
-          <h2><a href="#" title="Placeholder fo login sistem"><i class="fa fa-pencil">  </i></a><a href="#" title="A button that makes something awesome"><i class="fa fa-list"></i></a></h2>
+          <h2><a href="#" title="Placeholder fo login sistem"><i class="fa fa-pencil"></i></a><a href="#" title="A button that makes something awesome"><i class="fa fa-list"></i></a></h2>
         </div>
       </div>
     </div>
@@ -193,9 +195,11 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
                           
                           <div class="col-sm-12">
                             <textarea class="form-control" rows="3" id="todo" placeholder="New To Do"  name="todo" autofocus="autofocus"></textarea>
+                            <br>
                             <!-- <input type="text" name="todo" class="form-control" rows="6" id="todo" placeholder="New To Do" autofocus="autofocus">-->
                           </div>
                         </div>
+
                         <div class="form-group">
                           <div>
                             <button type="submit" class="btn btn-default" >Add To do</button>
@@ -215,13 +219,19 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
      <div class="col-md-9">
 
 
-        <div id="leftcol" class="pull-left col-xs-12 text-center">
+        <div id="alertRemove" class="col-xs-12 text-center">
 
                   <? if (!empty($successMessage)): ?>
-                  <div class="alert alert-success text-center"><?= $successMessage; ?></div>
+                  <div id="alert-message" class="alert alert-success"><?= $successMessage; ?></div>
+                  <script>
+					setTimeout(function(){$(".alert-success").css('display', 'hidden')}, 2000);
+                  </script>
                   <? endif; ?>
                   <? if (!empty($errorMessage)): ?>
-                  <div class="alert alert-danger text-center"><?= $errorMessage; ?></div>
+                  <div id="alert-message" class="alert  alert-danger"><?= $errorMessage; ?></div>
+                  <script>
+					setTimeout(function(){$(".alert-danger").css('display', 'hidden')}, 2000);
+                  </script>
                   <? endif; ?>
 
         <h1>Todo List</h1>
@@ -255,11 +265,10 @@ $nextPage = $currentPage  < $maxPage ? $currentPage + 1 : null;
 <form id="removeForm" action="ToDoMySQL.php" method="post">
   <input id="removeId" type="hidden" name="remove" value="">
 </form>
-
 <script type="text/javascript">
 //remove items
-var form = document.getElementById('removeForm');
-  var removeId = document.getElementById('removeId');
+	var form = document.getElementById('removeForm');
+	var removeId = document.getElementById('removeId');
 
   function removeById(id) {
     if(confirm('Are you sure you want to remove item?')) {
@@ -270,20 +279,14 @@ var form = document.getElementById('removeForm');
 
 
 //sidebar
-$('#sidebar').affix({
-    offset: {
-      top: $('header').height()
-    }
-  }); 
+	$('#sidebar').affix({
+	    offset: {
+	      top: $('header').height()
+	    }
+	  }); 
 
 
-// alerts hide after 5 seconds
-
-// function createAutoClosingAlert(selector, delay) {
-//    var alert = $(selector).alert();
-//    window.setTimeout(function() { alert.alert('close') }, delay);
-// }
-
+// alerts hide after 2 seconds
 </script>
 
 </body>

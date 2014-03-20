@@ -9,7 +9,7 @@
 
     <script>
 
-        var delay = 5000;
+        var delay = 2000;
         var timeoutId = null;
 
 
@@ -31,20 +31,28 @@
 
 
 
-            // todo:
-            // Use setTimeout and clearTimeout within this function
-            // so that the save() function is called 5 seconds after
-            // the last key up event. If a new key up event occurs,
-            // you need to cancel the existing timer and set a new one.
+        // todo:
+        // Use setTimeout and clearTimeout within this function
+        // so that the save() function is called 5 seconds after
+        // the last key up event. If a new key up event occurs,
+        // you need to cancel the existing timer and set a new one.
 
-        
-
+    
         // don't modify the line below
         // this causes the autosave function to be called whenever
         // a key up event occurs in the textarea
         // we will learn about events in the DOM lessons
-        var textarea = document.getElementById('important');
-        textarea.addEventListener('keyup', autosave, false);
+
+
+        // var textarea = document.getElementById('important');
+        // textarea.addEventListener('keyup', autosave, false);
+
+
+            $('#important').keyup(autosave() 
+               
+          
+        
+
 
     </script>
 

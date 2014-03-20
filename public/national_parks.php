@@ -84,7 +84,7 @@ if (!empty($_POST)) {
 <div class="navbar navbar-static-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="http://photojv.com/">Home</a>
+      <a class="navbar-brand" href="http://photojv.com/"></a>
     </div>
   </div>
 </div>
@@ -145,6 +145,33 @@ if (!empty($_POST)) {
     </div>
 </div> 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          
+
+
+
+
+
+
+
+
+
 
 
 <div class="table">
