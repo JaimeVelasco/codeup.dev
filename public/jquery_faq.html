@@ -1,0 +1,223 @@
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="TodoList for Codeup">
+    <meta name="author" content="Jaime Velasco">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,400,900' rel='stylesheet' type='text/css'>
+
+
+
+
+<style type="text/css">
+
+.clickable
+{
+  cursor: wait;
+
+}
+
+.invisible
+{
+  display: none;
+}
+
+
+</style>
+
+
+
+  <title>jQuery FAQ</title>
+</head>
+<body>
+
+<!-- <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+
+<!-- <div class="container">
+
+
+  <div class="col-md-12 text-center">
+
+
+      <div>
+         <dl>
+            <dt id="toggle">Acadia I</dt>
+              <dd>
+                Covering most of Mount Desert Island and other coastal islands, Acadia features the tallest mountain on the Atlantic coast of the United States, granite peaks, ocean shoreline, woodlands, and lakes. There are freshwater, estuary, forest, and intertidal habitats.
+              </dd>
+            <dt>American Samoa</dt>
+              <dd>
+                The southernmost national park is on three Samoan islands and protects coral reefs, rainforests, volcanic mountains, and white beaches. The area is also home to flying foxes, brown boobies, sea turtles, and 900 species of fish.
+              </dd>
+              <dt>Arches</dt>
+              <dd>
+                This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
+              </dd>
+              <dt>Arches</dt>
+              <dd>
+                This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
+              </dd>
+              <dt>Arches</dt>
+              <dd>
+                This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
+              </dd>
+              <dt>Arches</dt>
+              <dd>
+                This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
+              </dd>
+              <dt id="toggle">Arches</dt>
+               <dd>
+                This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
+              </dd>
+
+        </dl>
+        <a href="#" id="hide">Hide</a>
+        <br>
+        <a href="#" id="toggle">Toggle Invisible</a>
+
+    </div>
+         -->
+
+
+
+     
+
+
+
+
+
+
+
+
+
+  </div><!-- /.container -->
+        
+</div>
+
+
+<div class="container">
+
+
+  <div class="col-md-4 text-center">
+
+
+           <div>
+
+                    <h1>Parks List</h1>
+                    <h3>National Parks</h3>
+                    <ul id="national-parks">
+                        <li>Arches</li>
+                        <li>Badlands</li>
+                        <li>Carlsbad Caverns</li>
+                        <li>Denali</li>
+                        <li>Everglades</li>
+                    </ul>
+                    <h3>State Parks of Texas</h3>
+                    <ul id="state-parks-texas">
+                        <li>Abilene</li>
+                        <li>Big Bend</li>
+                        <li>Choke Canyon</li>
+                        <li>Davis Mountains</li>
+                        <li>Enchanted Rock</li>
+                    </ul>
+                    <h3>National Parks of Mexico</h3>
+                    <ul id="national-parks-mexico">
+                        <li>Desierto de los Leones</li>
+                        <li>Iztaccíhuatl-Popocatépetl</li>
+                        <li>Grutas de Cacahuamilpa</li>
+                        <li>Nevado de Colima</li>
+                        <li>Cumbres de Majalca</li>
+                    </ul>
+
+                </div>
+           </div>
+     </div>
+
+  <script src="assets/js/jquery-1.11.0.js"></script>
+  <script type="text/javascript">
+
+  // $('document').ready(function() {
+  //     $('#hide').click(function(event) {
+  //       event.preventDefault();
+  //         $('dd').addClass('invisible');
+  //     });
+  //   });
+
+
+
+  // $('document').ready(function() {
+  //     $('#toggle').click(function(event) {
+  //       // event.preventDefault();
+  //         $('dd').toggleClass('invisible');
+          
+  //     });
+  //   });
+
+
+
+    $('document').ready(function(){
+      $('li').click(function() {
+          $(this).parent().addClass('invisible');
+      });
+   });     
+
+
+
+  
+      // $('#state-parks-texas').children().first().css('font-weight', 'bold');
+      // $('#national-parks').children().first().css('font-weight', 'bold');
+      // $('#national-parks-mexico').children().first().css('font-weight', 'bold');
+ 
+
+
+
+
+
+     $('ul').each(function(){
+         $(this).children().first().css('font-weight', 'bold');
+       
+     });
+ 
+
+  </script>
+    
+
+
+
+  
+
+
+
+
+
+  
+</body>
+
+
+</html>
