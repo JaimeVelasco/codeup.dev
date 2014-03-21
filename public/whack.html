@@ -36,12 +36,6 @@ html.cursor
     cursor: url("assets/img/Handyman_HammerDwn.png"), auto;
 }
 
-html, body
-{
-    height: 100%;
-}
-
-
 
 .hole{
   border: 1px solid black;
@@ -148,10 +142,10 @@ body{
               <img src="assets/img/avocado.gif">
           </div>
 
-           <div class="hole">
+
+          <div class="hole">
               <img src="assets/img/avocado.gif">
           </div>
-
        </div>   
   </div>
 
@@ -173,25 +167,26 @@ body{
   <script type="text/javascript">
 
 
-    // $('#start').click(startWhacking);
-        
+    
+      $('#start').click(startGame);
 
 
+      function startGame(){
        var pickmole = function() {
           var holes = $('.hole');
           var rand = Math.floor(Math.random() * holes.length);
           $(holes[rand]).children().fadeIn(500, function(){
-            $(this).click(function(){
+          $(this).click(function(){
               score += 1;
               console.log(score);
             })
               $(this).fadeOut(500);
           });
       };
-
       pickmole();
 
       var moleInterval = setInterval(pickmole, 1500);
+    };
 
 
 
