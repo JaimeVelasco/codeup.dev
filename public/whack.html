@@ -19,28 +19,53 @@
 
 
 #board{
-  margin: 10px auto;
-  width: 456px; 
+  
+  
+  width: 600; 
+  float: right;
+  
 }
 
-.mole-hole{
+html
+{
+    cursor: url("assets/img/Handyman_HammerUp.png"), auto;
+}
+
+html.cursor
+{
+    cursor: url("assets/img/Handyman_HammerDwn.png"), auto;
+}
+
+html, body
+{
+    height: 100%;
+}
+
+
+
+.hole{
   border: 1px solid black;
   float: left;
-  height: 150px;
-  width: 150px;
+  height: 200px;
+  width: 200px;
 }
 
 img{
-  height: 150px;
-  width: 150px;
+  height: 200px;
+  width: 200px;
   display: none;
 }
 
 body{
-  padding-top: 100px;
+  padding-top: 70px;
   text-align: center;
 }
    
+
+.menuleft{
+  padding-top: 400px;
+  float:both;
+}   
 
 </style>
 
@@ -62,7 +87,7 @@ body{
           <a class="navbar-brand" href="#">Guacamole</a>
         </div>
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -74,36 +99,72 @@ body{
 
 
 <!--.container -->
-<div id="board">
+<div class: "col-md-12 text-center">  
+
+  <div class="col-md-7 text-center">    
+      <div class="cursor" id="board col-md-10 text-center">
+
+          <div id="1" class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+          <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+          <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+          <div id="1" class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+          <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+          <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+          <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+           <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+           <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+           <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+           <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+           <div class="hole">
+              <img src="assets/img/avocado.gif">
+          </div>
+
+       </div>   
+  </div>
+
+  <div class="col-md-3 text-center">
+    <div id="menuleft" class="col-md-12 text-center">
       <h1>Guacamole</h1>
-      <div id="1" class="mole-hole">
-          <img src="assets/img/avocado.gif">
-      </div>
-      <div class="mole-hole">
-          <img src="assets/img/avocado.gif">
-      </div>
-      <div class="mole-hole">
-          <img src="assets/img/avocado.gif">
-      </div>
-      <div class="mole-hole">
-          <img src="assets/img/avocado.gif">
-      </div>
-       <div class="mole-hole">
-          <img src="assets/img/avocado.gif">
-      </div>
-       <div class="mole-hole">
-          <img src="assets/img/avocado.gif">
-      </div>
-       <div class="mole-hole">
-          <img src="assets/img/avocado.gif">
-      </div>
-       <div class="mole-hole">
-          <img src="assets/img/avocado.gif">
-      </div>
-       <div class="mole-hole">
-          <img src="assets/img/avocado.gif">
-      </div>
-</div>
+      <button id="start">START</button>
+        <h5>Score: <span id="#score">0</span></h5>
+    </div>
+  </div>
+
+
+</div>  
 <!-- /.container -->
 
 
@@ -112,28 +173,25 @@ body{
   <script type="text/javascript">
 
 
-// Load 1 image randomly on page load.
+    // $('#start').click(startWhacking);
         
 
 
        var pickmole = function() {
-          var holes = $('.mole-hole');
+          var holes = $('.hole');
           var rand = Math.floor(Math.random() * holes.length);
           $(holes[rand]).children().fadeIn(500, function(){
-          $(this).fadeOut(500);
+            $(this).click(function(){
+              score += 1;
+              console.log(score);
+            })
+              $(this).fadeOut(500);
           });
       };
 
       pickmole();
 
-      var moleInterval = setInterval(pickmole, 2000);
-
-
-
-
-
-
-
+      var moleInterval = setInterval(pickmole, 1500);
 
 
 
@@ -144,10 +202,13 @@ body{
        
         
 
+//change cursor image on click
 
 
-
-  
+$("body").on("mousedown mouseup", function(e)
+{
+    $("html").toggleClass("cursor");
+});
 
 
   </script>

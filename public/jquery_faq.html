@@ -65,13 +65,9 @@
     </div> -->
 
 <div class="container">
-
-
   <div class="col-md-12 text-center">
-
-
       <div class="row">
-         <dl>
+        <!--  <dl> -->
             <dt>Acadia I</dt>
               <dd id="toggle">
                 Covering most of Mount Desert Island and other coastal islands, Acadia features the tallest mountain on the Atlantic coast of the United States, granite peaks, ocean shoreline, woodlands, and lakes. There are freshwater, estuary, forest, and intertidal habitats.
@@ -88,56 +84,46 @@
               <dd id="toggle">
                 This site features more than 2,000 natural sandstone arches, including the Delicate Arch. In a desert climate millions of years of erosion have led to these structures, and the arid ground has life-sustaining soil crust and potholes, natural water-collecting basins. Other geologic formations are stone columns, spires, fins, and towers.
               </dd>
-        
-
-
   </div><!-- /.container -->
-        
 </div>
 
 
 <div class="container">
-
-
   <div class="col-md-12 text-center">
-
-        <h1>Parks List</h1>
-
-           <div class="col-md-4 text-center">
-
-                    
-                    <h3 id="national-parks-toggle">National Parks</h3>
-                    <ul id="national-parks">
-                        <li>Arches</li>
-                        <li>Badlands</li>
-                        <li>Carlsbad Caverns</li>
-                        <li>Denali</li>
-                        <li>Everglades</li>
-                    </ul>
-           </div>
-           <div class="col-md-4 text-center">
-                    <h3 id="state-parks-texas-toggle">State Parks of Texas</h3>
-                    <ul id="state-parks-texas">
-                        <li>Abilene</li>
-                        <li>Big Bend</li>
-                        <li>Choke Canyon</li>
-                        <li>Davis Mountains</li>
-                        <li>Enchanted Rock</li>
-                    </ul>
-           </div>
-           <div class="col-md-4 text-center">
-                    <h3  id="national-parks-mexico-toggle">National Parks of Mexico</h3>
-                    <ul id="national-parks-mexico">
-                        <li>Desierto de los Leones</li>
-                        <li>Iztaccíhuatl-Popocatépetl</li>
-                        <li>Grutas de Cacahuamilpa</li>
-                        <li>Nevado de Colima</li>
-                        <li>Cumbres de Majalca</li>
-                    </ul>
-           </div>
-                </div>
-           </div>
+     <h1>Parks List</h1>
+     <div class="col-md-4 text-center">
+        <h3 id="national-parks-toggle">National Parks</h3>
+        <ul id="national-parks">
+          <li>Arches</li>
+          <li>Badlands</li>
+          <li>Carlsbad Caverns</li>
+          <li>Denali</li>
+          <li>Everglades</li>
+        </ul>
      </div>
+     <div class="col-md-4 text-center">
+        <h3 id="state-parks-texas-toggle">State Parks of Texas</h3>
+        <ul id="state-parks-texas">
+          <li>Abilene</li>
+          <li>Big Bend</li>
+          <li>Choke Canyon</li>
+          <li>Davis Mountains</li>
+          <li>Enchanted Rock</li>
+        </ul>
+     </div>
+     <div class="col-md-4 text-center">
+        <h3  id="national-parks-mexico-toggle">National Parks of Mexico</h3>
+        <ul id="national-parks-mexico">
+          <li>Desierto de los Leones</li>
+          <li>Iztaccíhuatl-Popocatépetl</li>
+          <li>Grutas de Cacahuamilpa</li>
+          <li>Nevado de Colima</li>
+          <li>Cumbres de Majalca</li>
+        </ul>
+     </div>
+    </div>
+ </div>
+</div>
 
   <script src="assets/js/jquery-1.11.0.js"></script>
   <script type="text/javascript">
@@ -145,7 +131,7 @@
 
 
 // toggle  hide/show when clicking <dt>
-    $('document').ready(function() {
+  $('document').ready(function() {
 
 
         $('dt').click(function() {
@@ -184,7 +170,7 @@
      });
 
 //FadeOut <h2> on click
-     $('h2').on('click', function() {
+        $('h2').on('click', function() {
         $(this).fadeOut(1000);
      });
 
