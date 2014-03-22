@@ -29,12 +29,16 @@
 html
 {
     cursor: url("assets/img/Handyman_HammerUp.png"), auto;
+
 }
 
 html.cursor
 {
     cursor: url("assets/img/Handyman_HammerDwn.png"), auto;
 }
+
+
+
 
 
 .hole{
@@ -88,77 +92,71 @@ body{
           </ul>
         </div>
       </div>
-    </div>
+</div>
 
 
 
 <!--.container -->
 <div class: "col-md-12 text-center">  
 
-  <div class="col-md-7 text-center">    
-      <div class="cursor" id="board col-md-10 text-center">
+  <div class="col-md-6 text-center">    
+      <div class="Board" id="board col-md-12 text-center">
 
           <div id="1" class="hole">
-              <img src="assets/img/avocado.gif">
+              <img class="mole" src="assets/img/avocado_on.gif">
           </div>
 
           <div class="hole">
-              <img src="assets/img/avocado.gif">
+              <img class="mole" src="assets/img/avocado_on.gif">
           </div>
 
           <div class="hole">
-              <img src="assets/img/avocado.gif">
+              <img class="mole" src="assets/img/avocado_on.gif">
           </div>
 
           <div id="1" class="hole">
-              <img src="assets/img/avocado.gif">
+              <img class="mole" src="assets/img/avocado_on.gif">
           </div>
 
           <div class="hole">
-              <img src="assets/img/avocado.gif">
+              <img class="mole" src="assets/img/avocado_on.gif">
           </div>
 
           <div class="hole">
-              <img src="assets/img/avocado.gif">
+              <img class="mole" src="assets/img/avocado_on.gif">
           </div>
 
           <div class="hole">
-              <img src="assets/img/avocado.gif">
+              <img class="mole" src="assets/img/avocado_on.gif">
           </div>
 
            <div class="hole">
-              <img src="assets/img/avocado.gif">
+              <img class="mole" src="assets/img/avocado_on.gif">
           </div>
 
            <div class="hole">
-              <img src="assets/img/avocado.gif">
-          </div>
-
-           <div class="hole">
-              <img src="assets/img/avocado.gif">
-          </div>
-
-           <div class="hole">
-              <img src="assets/img/avocado.gif">
-          </div>
-
-
-          <div class="hole">
-              <img src="assets/img/avocado.gif">
+              <img class="mole" src="assets/img/avocado_on.gif">
           </div>
        </div>   
   </div>
 
+
+
   <div class="col-md-3 text-center">
     <div id="menuleft" class="col-md-12 text-center">
       <h1>Guacamole</h1>
-      <button id="start">START</button>
-        <h5>Score: <span id="#score">0</span></h5>
-    </div>
-  </div>
+      <button type="button" class="btn btn-danger btn-lg" id="start">START</button>
+      <h2>Score: <span id="score">0</span></h2>
 
+      <h2>High Score:<span id="highscore">0</span></h2>
+      <h2>Level: <span id="level">1</span></h2><h2>Time remaining:<span id="timer"></span></h2> 
+      <div id="game-over">
+        <h1>Game Over</h1>
+      </div>     
+    </div> 
+</div>
 
-</div>  
+</div>      
 <!-- /.container -->
 
 
@@ -167,35 +165,121 @@ body{
   <script type="text/javascript">
 
 
+
+// Get holes
+var holes = $('.hole');
+
+// Keep score
+var score = 0;
+var highscore = 0;
+var speed = 1000;
+var level = 1;
+var start_time = 30;
+
+
+$('#game-over').hide();
+$('#timer').html(start_time);
+// Function to show the mole!
+var show = function() {
+    // Fade out any moles
+
+    $('.mole').fadeOut(1000);
+
     
-      $('#start').click(startGame);
-
-
-      function startGame(){
-       var pickmole = function() {
-          var holes = $('.hole');
-          var rand = Math.floor(Math.random() * holes.length);
-          $(holes[rand]).children().fadeIn(500, function(){
-          $(this).click(function(){
-              score += 1;
-              console.log(score);
-            })
-              $(this).fadeOut(500);
-          });
-      };
-      pickmole();
-
-      var moleInterval = setInterval(pickmole, 1500);
-    };
-
-
-
-//Fade image out on click       
-        $('img').click(function() {
-        $(this).fadeOut(1000);
-        });
-       
+    if ($('#timer').html() <= 1 ) {
+        stop_game();
+    } else {
+        // Get random hole
+        var rand = Math.floor(Math.random() * holes.length)
+        var hole = $(holes[rand]);
         
+        // Add mole selected hole
+        hole.children().fadeIn(500);
+    }    
+}
+
+
+$(".changer").click(function() {
+    if ($(this).attr("class") == "changer") {
+      this.src = this.src.replace("_on","_off");
+    } else {
+      this.src = this.src.replace("_off","_on");
+    }
+    $(this).toggleClass("on");
+  });
+
+
+
+
+
+
+// Click event listener
+$('.mole').click(function() {
+
+    // Score 
+    $('#score').html(++score);
+    // Highscore
+    if (score > highscore) {
+        $('#highscore').html(++highscore);
+    }
+    // Level Up!
+    if (score % 9 == 0) {
+        $('#level').html(++level);
+        clearInterval(game_loop);
+        speed = speed - (speed - Math.floor(speed * .8));
+        game_loop = setInterval(show, speed);
+    }
+    // Hide the mole!
+    $(this).hide();
+});
+
+
+
+var start_timer = function() {
+    countdown = setInterval(function() {
+        var timer = $('#timer');
+        current = parseInt(timer.html());
+        timer.html(--current);
+    }, 1000);
+};
+
+
+var start_game = function() {
+    game_loop = setInterval(show, speed);
+    $('#start').attr('disabled', 'disabled');
+    $('#board').show();
+    $('#timer').show();
+    $('#score').html(score);
+    $('#level').html(level);
+    start_timer();
+};
+
+
+var stop_game = function() {
+    clearInterval(countdown);
+    clearInterval(game_loop);
+    $('#score').html('0');
+    $('#timer').html(start_time);
+    $('#start').removeAttr('disabled');
+    $('#board').hide();
+    $('#game-over').show();
+    speed = 1500;
+    score = 0;
+    level = 1;
+};
+
+
+
+
+
+
+ $('#start').click(start_game);
+
+// image swap
+
+
+
+
 
 //change cursor image on click
 
@@ -204,6 +288,9 @@ $("body").on("mousedown mouseup", function(e)
 {
     $("html").toggleClass("cursor");
 });
+
+
+
 
 
   </script>
