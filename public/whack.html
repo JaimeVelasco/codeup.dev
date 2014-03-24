@@ -18,26 +18,38 @@
 
 
 
-#board{
+.board{
   
-  
+  padding-top: 70px;
   width: 600; 
   float: right;
+  cursor: url("assets/img/Handyman_HammerUp.png"), auto;
   
 }
 
-html
-{
-    cursor: url("assets/img/Handyman_HammerUp.png"), auto;
 
-}
 
-html.cursor
+.board.cursor
 {
     cursor: url("assets/img/Handyman_HammerDwn.png"), auto;
 }
 
 
+@media(min-width:767px) {
+    .navbar {
+        padding: 20px 0;
+        background-color: #fff;
+        border-bottom: none;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+    }
+
+    .top-nav-collapse {
+        /* Customize the look and feel of the collapsed top nav here */
+        padding: 0;
+    }
+}
 
 
 
@@ -100,7 +112,7 @@ body{
 <div class: "col-md-12 text-center">  
 
   <div class="col-md-6 text-center">    
-      <div class="Board" id="board col-md-12 text-center">
+      <div class="board" id="board col-md-12 text-center">
 
           <div id="1" class="hole">
               <img class="mole" src="assets/img/avocado_on.gif">
@@ -286,7 +298,7 @@ var stop_game = function() {
 
 $("body").on("mousedown mouseup", function(e)
 {
-    $("html").toggleClass("cursor");
+    $(".board").toggleClass("cursor");
 });
 
 
